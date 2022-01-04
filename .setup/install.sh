@@ -11,7 +11,12 @@ fi
 
 mkdir .packages
 git clone git://github.com/wting/autojump.git $HOME/.packages/autojump
-$HOME/.packages/autojump/install.py
+cd $HOME/.packages/autojump
+python3 install.py
+cd $HOME
+
+sed -i "s/\#\!\/usr\/bin\/env\ python/\#\!\/usr\/bin\/env\ python3/" ~/.autojump/bin/autojump
+
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.packages/fzf
 $HOME/.packages/fzf/install --all
 
