@@ -1,0 +1,7 @@
+alias lh='ls -lhrt'
+alias c='clear'
+alias v='vim'
+alias path=echo -e /home/peter/.cargo/bin
+alias ag='sudo apt-get'
+alias a='sudo apt'
+alias config='/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
