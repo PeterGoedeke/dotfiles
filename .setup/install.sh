@@ -1,10 +1,10 @@
-if [[ sudo apt update -y && sudo apt upgrade -y ]]
+if sudo apt update -y && sudo apt upgrade -y
 then
     sudo apt-get install -y \
         git\
         zsh\
         python3
-elif [[ sudo yum update ]]
+elif sudo yum update
 then
     sudo yum -y install zsh
 fi
@@ -13,7 +13,7 @@ mkdir .packages
 git clone git://github.com/wting/autojump.git $HOME/.packages/autojump
 $HOME/.packages/autojump/install.py
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.packages/fzf
-$HOME/.packages/fzf/install
+$HOME/.packages/fzf/install --all
 
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 
