@@ -78,15 +78,20 @@ ENABLE_CORRECTION="false"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-	zsh-autosuggestions
-	zsh-completions
-	zsh-syntax-highlighting
-	zsh-history-substring-search
 	autojump
-	web-search
 	copybuffer
 	dirhistory
+	git
+	web-search
+	zsh-autosuggestions
+	zsh-completions
+	zsh-history-substring-search
+	zsh-syntax-highlighting
+    colored-man-pages
+    colorize
+    copypath
+    copyfile
+    jump
 )
 autoload -U compinit && compinit
 
@@ -128,3 +133,142 @@ bindkey -M emacs '^N' history-substring-search-down
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source $HOME/.zsh_aliases
+
+fbr() {
+  local branches branch
+  branches=$(git branch -a) &&
+  branch=$(echo "$branches" | fzf +s +m) &&
+  git checkout $(echo "$branch" | sed "s:.* remotes/origin/::" | sed "s:.* ::")
+}
+
+# fco_preview - checkout git branch/tag, with a preview showing the commits between the tag/branch and HEAD
+fco_preview() {
+  local tags branches target
+  branches=$(
+    git --no-pager branch --all \
+      --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mbranch%09%1B[m%(refname:short)%(end)%(end)" \
+    | sed '/^$/d') || return
+  tags=$(
+    git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
+  target=$(
+    (echo "$branches"; echo "$tags") |
+    fzf --no-hscroll --no-multi -n 2 \
+        --ansi --preview="echo {} | awk '{print \$2}' | xargs git diff | diff-so-fancy") || return
+        # --ansi --preview="git --no-pager log -150 --pretty=format:%s '..{2}'") || return
+  git checkout $(awk '{print $2}' <<<"$target" )
+}
+
+
+# fco_preview - checkout git branch/tag, with a preview showing the commits between the tag/branch and HEAD
+fco_preview_local() {
+  local tags branches target
+  branches=$(
+    git --no-pager branch \
+      --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mbranch%09%1B[m%(refname:short)%(end)%(end)" \
+    | sed '/^$/d') || return
+  tags=$(
+    git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
+  target=$(
+    (echo "$branches"; echo "$tags") |
+    fzf --no-hscroll --no-multi -n 2 \
+        --ansi --preview="echo {} | awk '{print \$2}' | xargs git diff | diff-so-fancy") || return
+        # --ansi --preview="git --no-pager log -150 --pretty=format:%s '..{2}'") || return
+  git checkout $(awk '{print $2}' <<<"$target" )
+}
+#
+# really need a good git log replacement which shows the changes in the preview
+
+# this is a replacement of git log without the description, but it should probably
+# have a preview added so that you can see changes in the files
+# fshow - git commit browser
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | diff-so-fancy | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+
+alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
+_gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
+
+# hotkey to check it out
+# fshow_preview - git commit browser with previews
+fshow_preview() {
+    glNoGraph |
+        fzf --no-sort --reverse --tiebreak=index --no-multi \
+            --ansi --preview="$_viewGitLogLine" \
+                --header "enter to view, alt-y to copy hash" \
+                --bind "enter:execute:$_viewGitLogLine   | less -R" \
+                --bind "alt-y:execute:$_gitLogLineToHash | xclip"
+}
+
+# add a way to apply and pop
+# fstash - easier way to deal with stashes
+# type fstash to get a list of your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+fstash() {
+  local out q k sha
+  while out=$(
+    git stash list --pretty="%C(yellow)%h %gd %Cgreen%cr %C(blue)%gs" |
+    fzf --ansi --no-sort --query="$q" --print-query \
+        --expect=ctrl-d,ctrl-b,ctrl-o,ctrl-a \
+        --preview="echo {} | grep -o '[a-f0-9]\{7\}' | xargs -I % sh -c 'git diff -R % | diff-so-fancy'");
+        # --preview="echo {} | awk '{print $1}' | xargs  'git diff' | diff-so-fancy");
+  do
+    content=$(echo $out | xargs);
+    k=$(echo $content | awk '{print $1}');
+    sha=$(echo $content | awk '{print $2}');
+
+    sha="${sha%% *}"
+    [[ -z "$sha" ]] && continue
+    if [[ "$k" == 'ctrl-d' ]]; then
+      git diff $sha | diff-so-fancy | less
+    elif [[ "$k" == 'ctrl-b' ]]; then
+      git stash branch "stash-$sha" $sha
+      break;
+    elif [[ "$k" == 'ctrl-o' ]]; then
+      git stash pop
+    elif [[ "$k" == 'ctrl-a' ]]; then
+      git stash apply
+    else
+      git stash show -p $k | diff-so-fancy | less
+    fi
+  done
+}
+
+fadd() {
+    out=$(git status --porcelain |
+    fzf -m --ansi --no-sort --reverse \
+    --preview="echo {} | awk '{print \$2}' | xargs git diff | diff-so-fancy");
+
+    if [[ ! -z "$out" ]]
+    then
+        echo $out | awk '{print $2}' | xargs git add
+        git status
+    fi
+}
+
+
+fstashadd() {
+    out=$(git status --porcelain |
+    fzf -m --ansi --no-sort --reverse \
+    --preview="echo {} | awk '{print \$2}' | xargs git diff | diff-so-fancy");
+
+    if [[ ! -z "$out" ]]
+    then
+        if [[ ! -z "$1" ]]
+        then
+            echo $out | awk '{print $2}' | xargs git stash push -m $1
+        else
+            echo $out | awk '{print $2}' | xargs git stash push
+        fi
+        git status
+    fi
+}
