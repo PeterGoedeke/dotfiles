@@ -599,7 +599,8 @@ before packages are loaded."
                                  (file+headline "~/Dropbox/org/reminder.org" "reminder")
                                  "* %i%? \n %U")))
 
-  (setq org-refile-targets '(("~/Dropbox/org/main.org" :maxlevel . 1)
+  (setq org-refile-targets '((nil :maxlevel . 1)
+                             ("~/Dropbox/org/main.org" :maxlevel . 1)
                              ("~/Dropbox/org/someday.org" :level . 1)
                              ("~/Dropbox/org/reminder.org" :maxlevel . 2)
                              ("~/Dropbox/org/elfeed.org" :maxlevel . 1)))
