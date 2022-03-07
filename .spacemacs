@@ -36,6 +36,7 @@ This function should only modify configuration layer settings."
      typescript
      (javascript :variables
                  javascript-import-tool 'import-js)
+     purescript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -786,6 +787,22 @@ before packages are loaded."
     ;;   (setq company-box-scrollbar nil)
     ;;   (setq company-box-frame-behavior 'point))
 
+  (defun insert-type ()
+    "Display the type signature and documentation of the thing at
+point."
+    (interactive)
+    (let ((contents (-some->> (lsp--text-document-position-params)
+                      (lsp--make-request "textDocument/hover")
+                      (lsp--send-request)
+                      (lsp:hover-contents))))
+      (if (and contents (not (equal contents "")))
+          (progn
+            (evil-previous-line)
+            (newline)
+            (insert (string-trim-right (lsp--render-on-hover-content contents t))))
+        (lsp--info "No content at point."))))
+
+  (spacemacs/set-leader-keys "ot" 'insert-type)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -806,7 +823,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-agenda-files
    '("~/Dropbox/org/routine.org" "/home/peter/Dropbox/org/main.org" "/home/peter/Dropbox/uni/assignments.org"))
  '(package-selected-packages
-   '(xterm-color vterm terminal-here shell-pop multi-term eshell-z eshell-prompt-extras esh-help company-prescient prescient company-lsp tern company-quickhelp apheleia format-all language-id inheritenv org-bullets helm-exwm evil-exwm-state desktop-environment exwm doom-modeline shrink-path highlight-indent-guides doom-themes darkroom elfeed-web elfeed-org elfeed-goodies ace-jump-mode elfeed yaml-mode mmm-mode markdown-toc gh-md web-beautify tide prettier-js npm-mode nodejs-repl livid-mode skewer-mode simple-httpd json-reformat json-navigator hierarchy json-mode json-snatcher js2-refactor multiple-cursors js2-mode js-doc web-mode typescript-mode import-js grizzl emmet-mode add-node-modules-path yasnippet-snippets treemacs-magit smeargle orgit-forge orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org-cliplink lsp-ui lsp-treemacs lsp-origami origami htmlize helm-org-rifle helm-lsp lsp-mode helm-git-grep helm-company helm-c-yasnippet gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link fuzzy forge yaml markdown-mode magit ghub closql emacsql-sqlite emacsql treepy magit-section git-commit with-editor transient flycheck-pos-tip pos-tip evil-org company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(psci purescript-mode psc-ide xterm-color vterm terminal-here shell-pop multi-term eshell-z eshell-prompt-extras esh-help company-prescient prescient company-lsp tern company-quickhelp apheleia format-all language-id inheritenv org-bullets helm-exwm evil-exwm-state desktop-environment exwm doom-modeline shrink-path highlight-indent-guides doom-themes darkroom elfeed-web elfeed-org elfeed-goodies ace-jump-mode elfeed yaml-mode mmm-mode markdown-toc gh-md web-beautify tide prettier-js npm-mode nodejs-repl livid-mode skewer-mode simple-httpd json-reformat json-navigator hierarchy json-mode json-snatcher js2-refactor multiple-cursors js2-mode js-doc web-mode typescript-mode import-js grizzl emmet-mode add-node-modules-path yasnippet-snippets treemacs-magit smeargle orgit-forge orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org-cliplink lsp-ui lsp-treemacs lsp-origami origami htmlize helm-org-rifle helm-lsp lsp-mode helm-git-grep helm-company helm-c-yasnippet gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link fuzzy forge yaml markdown-mode magit ghub closql emacsql-sqlite emacsql treepy magit-section git-commit with-editor transient flycheck-pos-tip pos-tip evil-org company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
