@@ -1,0 +1,17 @@
+[user]
+	email = peterbgoedeke@gmail.com
+	name = Peter Goedeke
+[credential]
+	helper = cache
+[core]
+	editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = ~/.gitignore
+[merge]
+	tool = vimdiff
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[diff-so-fancy]
+	markEmptyLines = false
+[github]
+	user = peterbgoedeke@gmail.com
