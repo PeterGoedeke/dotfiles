@@ -65,6 +65,7 @@ This function should only modify configuration layer settings."
             close-window-with-terminal t)
      multiple-cursors
      org
+     spacemacs-org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -594,25 +595,29 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (setq org-agenda-files '("~/Dropbox/org/inbox.org"
-                           "~/Dropbox/org/main.org"
-                           "~/Dropbox/org/reminder.org"
-                           "~/Dropbox/org/routine.org"))
+  (setq org-agenda-files '("~/Dropbox/org/main.org"))
 
-  (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                 (file+headline "~/Dropbox/org/inbox.org" "Tasks")
-                                 "* TODO %i%?")
-                                ("T" "Reminder" entry
-                                 (file+headline "~/Dropbox/org/reminder.org" "reminder")
-                                 "* %i%? \n %U")))
+  (setq org-capture-templates '(("t" "Todo [general]" entry
+                                 (file+headline "~/Dropbox/org/inbox.org" "General")
+                                 "** TODO %i%?")
+                                ("o" "Todo [obligations]" entry
+                                 (file+headline "~/Dropbox/org/inbox.org" "Obligations")
+                                 "** TODO %i%?")
+                                ("r" "Todo [reflection]" entry
+                                 (file+headline "~/Dropbox/org/inbox.org" "Reflection")
+                                 "** TODO %i%?")
+                                ("e" "Todo [dev environment]" entry
+                                 (file+headline "~/Dropbox/org/inbox.org" "Development Environment")
+                                 "** TODO %i%?")))
 
   (setq org-refile-targets '((nil :maxlevel . 1)
                              ("~/Dropbox/org/main.org" :maxlevel . 1)
+                             ("~/Dropbox/org/main.org" :tag . "project")
                              ("~/Dropbox/org/someday.org" :level . 1)
                              ("~/Dropbox/org/reminder.org" :maxlevel . 2)
                              ("~/Dropbox/org/elfeed.org" :maxlevel . 1)))
 
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")))
 
   (setq org-startup-indented t)
 
@@ -623,6 +628,7 @@ before packages are loaded."
   (setq-default evil-escape-key-sequence "jk")
 
   (evil-define-key 'normal global-map (kbd "0") (kbd "^"))
+  (evil-define-key 'normal global-map (kbd "Y") (kbd "y$"))
   ;; (evil-define-key 'normal global-map (kbd "S") (kbd "/"))
 
   ;; (evil-map visual "s" "0")
@@ -703,6 +709,7 @@ before packages are loaded."
   ;; (spacemacs|disable-company typescript-mode)
 
   (spacemacs/set-leader-keys "od" 'insert-current-time)
+  (spacemacs/set-leader-keys "ob" 'browse-url)
 
   ;; (require 'org-bullets)
   ;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
