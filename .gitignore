@@ -1,1 +1,8 @@
 .cfg/
+
+*#
+.projectile
+.idea
+.vscode
+TODOs.org
+*.swp
