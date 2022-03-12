@@ -100,6 +100,8 @@ This function should only modify configuration layer settings."
                                       git-gutter-fringe
                                       (emacs-prisma-mode :location (recipe :fetcher github :repo
                                                                            "pimeys/emacs-prisma-mode"))
+                                      bazel
+                                      emacs-bazel-mode
                                       ;; company-box
                                       ;; (typescript-mode :mode ("\\.tsx?\\'" . typescript-mode))
                                       ;; auto-complete
