@@ -660,9 +660,9 @@ before packages are loaded."
   ;; (add-hook 'lsp-completion-mode-hook #'baal-setup-lsp-company)
 
   ;; (spacemacs/declare-prefix "o" "own-menu")
-  ;; (spacemacs/set-leader-keys "om" '(switch-to-buffer (get-buffer-create "/home/peter/Dropbox/org/main.org")))
+  ;; (spacemacs/set-leader-keys "om" '(switch-to-buffer (get-buffer-create "~/Dropbox/org/main.org")))
 
-  ;; (get-buffer-create "/home/peter/Dropbox/org/main.org")
+  ;; (get-buffer-create "~/Dropbox/org/main.org")
   (setq highlight-indent-guides-method 'character)
   ;; (setq highlight-indent-guides-responsive 'top)
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
@@ -706,6 +706,8 @@ before packages are loaded."
     "insert the current time (1-week scope) into the current buffer."
     (interactive)
     (insert (format-time-string current-time-format (current-time))))
+
+  (setq markdown-fontify-code-blocks-natively t)
 
   ;; (setq company-backends '((company-keywords
   ;;                          :with
@@ -852,7 +854,7 @@ This function is called at the very end of Spacemacs initialization."
    '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default))
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
-   '("~/Dropbox/org/routine.org" "/home/peter/Dropbox/org/main.org" "/home/peter/Dropbox/uni/assignments.org"))
+   '("~/Dropbox/org/routine.org" "~/Dropbox/org/main.org" "~/Dropbox/uni/assignments.org"))
  '(package-selected-packages
    '(yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode pydoc py-isort poetry pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent helm-pydoc helm-gtags helm-cscope xcscope ggtags cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic ibuffer-projectile bazel zeal-at-point helm-dash dash-docs lsp-haskell hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell dante lcr haskell-mode company-cabal cmm-mode attrap dired-subtree evil-snipe better-jumper nov esxml kv git-gutter-fringe fringe-helper git-gutter emacs-prisma-mode dap-mode bui helm-rtags google-c-style gendoxy flycheck-ycmd flycheck-rtags disaster cpp-auto-include company-ycmd ycmd request-deferred deferred company-rtags rtags company-c-headers ccls realgud-lldb realgud test-simple loc-changes load-relative x86-lookup nasm-mode psci purescript-mode psc-ide xterm-color vterm terminal-here shell-pop multi-term eshell-z eshell-prompt-extras esh-help company-prescient prescient company-lsp tern company-quickhelp apheleia format-all language-id inheritenv org-bullets helm-exwm evil-exwm-state desktop-environment exwm doom-modeline shrink-path highlight-indent-guides doom-themes darkroom elfeed-web elfeed-org elfeed-goodies ace-jump-mode elfeed yaml-mode mmm-mode markdown-toc gh-md web-beautify tide prettier-js npm-mode nodejs-repl livid-mode skewer-mode simple-httpd json-reformat json-navigator hierarchy json-mode json-snatcher js2-refactor multiple-cursors js2-mode js-doc web-mode typescript-mode import-js grizzl emmet-mode add-node-modules-path yasnippet-snippets treemacs-magit smeargle orgit-forge orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-contrib org-cliplink lsp-ui lsp-treemacs lsp-origami origami htmlize helm-org-rifle helm-lsp lsp-mode helm-git-grep helm-company helm-c-yasnippet gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link fuzzy forge yaml markdown-mode magit ghub closql emacsql-sqlite emacsql treepy magit-section git-commit with-editor transient flycheck-pos-tip pos-tip evil-org company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
