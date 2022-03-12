@@ -735,6 +735,12 @@ before packages are loaded."
   ;;   :hook (org-mode . org-bullets-mode))
   (setq scroll-margin 20)
 
+  (use-package dired-subtree :ensure t
+    :after dired
+    :config
+    (bind-key "<tab>" #'dired-subtree-toggle dired-mode-map)
+    (bind-key "<backtab>" #'dired-subtree-cycle dired-mode-map))
+
   (use-package lsp-mode
     :init
     (setq lsp-keymap-prefix "C-c l")
@@ -836,6 +842,30 @@ point."
   (setq auth-sources '("~/.authinfo"))
   (setq magit-repository-directories '(("~/Documents/github" . 1)))
 
+  (spacemacs/set-leader-keys "or" 'sp-wrap-round)
+  (spacemacs/set-leader-keys "oc" 'org-content)
+
+  (defun find-in-home ()
+    (interactive)
+    (helm-find-files-1 "~/"))
+
+  (defun find-in-documents ()
+    (interactive)
+    (helm-find-files-1 "~/Documents/"))
+
+  (defun find-in-downloads ()
+    (interactive)
+    (helm-find-files-1 "~/Downloads/"))
+
+  (defun find-in-github ()
+    (interactive)
+    (helm-find-files-1 "~/Documents/github/"))
+
+  (spacemacs/declare-prefix "of" "find")
+  (spacemacs/set-leader-keys "off" 'find-in-home)
+  (spacemacs/set-leader-keys "ofd" 'find-in-documents)
+  (spacemacs/set-leader-keys "ofD" 'find-in-downloads)
+  (spacemacs/set-leader-keys "ofg" 'find-in-github)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
