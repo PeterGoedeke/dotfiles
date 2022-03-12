@@ -64,11 +64,14 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      helm
+     (ibuffer :variables ibuffer-group-buffers-by 'projects)
      lsp
      markdown
      (shell :variables
             shell-default-shell 'vterm
             close-window-with-terminal t)
+     (dash :variables
+           dash-autoload-common-docsets nil)
      multiple-cursors
      org
      spacemacs-org
