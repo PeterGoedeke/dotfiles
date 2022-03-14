@@ -272,3 +272,5 @@ fstashadd() {
         git status
     fi
 }
+
+export PATH=~/.emacs.d/bin:$PATH
