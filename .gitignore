@@ -1,5 +1,6 @@
 .cfg/
 
+*.log
 *#
 .projectile
 .idea
