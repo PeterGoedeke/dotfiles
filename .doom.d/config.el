@@ -64,10 +64,15 @@
                         ("~/Dropbox/org/elfeed.org" :maxlevel . 1)))
 
 (setq scroll-margin 20)
+(setq evil-move-cursor-back nil)
+(setq projectile-project-search-path '("~/Documents/github"))
 
 (map! :leader
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url))
+
+(map!
+ :nv "0" #'evil-first-non-blank)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
