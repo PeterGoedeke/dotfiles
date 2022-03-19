@@ -274,3 +274,6 @@ fstashadd() {
 }
 
 export PATH=~/.emacs.d/bin:$PATH
+
+alias less=cless
+alias cat=ccat
