@@ -86,7 +86,11 @@ same directory as the org-buffer and insert a link to this file."
        :desc "browse" "a" #'browse-url))
 
 (map!
- :nv "0" #'evil-first-non-blank)
+ :nv "0" #'evil-first-non-blank
+ :nv "#" #'evil-ex-search-word-forward
+ :nv "*" #'evil-ex-search-word-backward)
+
+(setq display-line-numbers-type 'relative)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
