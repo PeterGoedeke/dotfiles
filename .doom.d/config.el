@@ -92,6 +92,8 @@ same directory as the org-buffer and insert a link to this file."
 
 (setq display-line-numbers-type 'relative)
 
+(setq auth-sources '("~/.authinfo"))
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
