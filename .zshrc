@@ -274,6 +274,7 @@ fstashadd() {
 }
 
 export PATH=~/.emacs.d/bin:$PATH
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 alias less=cless
 alias cat=ccat
