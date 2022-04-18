@@ -51,3 +51,5 @@
 
 (package! lsp-mode)
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+
+(package! visual-fill-column)

@@ -88,11 +88,25 @@ same directory as the org-buffer and insert a link to this file."
 (map!
  :nv "0" #'evil-first-non-blank
  :nv "#" #'evil-ex-search-word-forward
+ :nv "j" #'evil-next-visual-line
+ :nv "k" #'evil-previous-visual-line
  :nv "*" #'evil-ex-search-word-backward)
 
 (setq display-line-numbers-type 'relative)
 
 (setq auth-sources '("~/.authinfo"))
+
+(global-display-fill-column-indicator-mode)
+
+(add-hook! 'markdown-mode-hook 'visual-fill-column-mode)
+(add-hook! 'LaTeX-mode-hook 'visual-fill-column-mode)
+(add-hook! 'org-mode-hook 'visual-fill-column-mode)
+
+;; (after! evil-mode
+;;         (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+;;         (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+;;         (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+;;         (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
