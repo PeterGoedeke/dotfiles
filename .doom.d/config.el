@@ -64,6 +64,7 @@
                         ("~/Dropbox/org/elfeed.org" :maxlevel . 1)))
 
 (setq scroll-margin 20)
+;; (setq scroll-conservatively 101)
 (setq evil-move-cursor-back nil)
 (setq projectile-project-search-path '("~/Documents/github"))
 
@@ -97,6 +98,11 @@ same directory as the org-buffer and insert a link to this file."
 (setq auth-sources '("~/.authinfo"))
 
 (global-display-fill-column-indicator-mode)
+
+(setq doom-modeline-enable-word-count t)
+(setq doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode latex-mode))
+
+(setq doc-view-continuous t)
 
 (add-hook! 'markdown-mode-hook 'visual-fill-column-mode)
 (add-hook! 'LaTeX-mode-hook 'visual-fill-column-mode)
