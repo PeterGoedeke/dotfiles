@@ -108,6 +108,17 @@ same directory as the org-buffer and insert a link to this file."
 (add-hook! 'LaTeX-mode-hook 'visual-fill-column-mode)
 (add-hook! 'org-mode-hook 'visual-fill-column-mode)
 
+(setq c-offsets-alist '((innamespace . 0)
+                        (access-label . /)
+                        (inclass . +)))
+
+(after! cc-mode (setq c-basic-offset 2))
+
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+(use-package! autopair
+  :config
+  (autopair-global-mode))
+
 ;; (after! evil-mode
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)

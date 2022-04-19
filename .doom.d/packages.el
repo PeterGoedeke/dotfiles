@@ -53,3 +53,5 @@
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 
 (package! visual-fill-column)
+
+(package! autopair :recipe (:host github :repo "joaotavora/autopair"))
