@@ -91,7 +91,8 @@ same directory as the org-buffer and insert a link to this file."
  :nv "#" #'evil-ex-search-word-forward
  :nv "j" #'evil-next-visual-line
  :nv "k" #'evil-previous-visual-line
- :nv "*" #'evil-ex-search-word-backward)
+ :nv "*" #'evil-ex-search-word-backward
+ :v "s" #'evil-surround-region)
 
 (setq display-line-numbers-type 'relative)
 
@@ -118,6 +119,16 @@ same directory as the org-buffer and insert a link to this file."
 (use-package! autopair
   :config
   (autopair-global-mode))
+
+(after! evil-surround
+  (let ((pairs '((?j "[" . "]")
+                 (?k "(" . ")")
+                 (?l "{" . "}")
+                 (?\; "<" . ">")
+                 (?g "'" . "'")
+                 (?h "\"" . "\""))))
+    (prependq! evil-surround-pairs-alist pairs)
+    (prependq! evil-embrace-evil-surround-keys (mapcar #'car pairs))))
 
 ;; (after! evil-mode
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
