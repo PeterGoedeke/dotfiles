@@ -2,6 +2,18 @@
 
 location="$HOME/dotfiles"
 
+rm "$HOME/.zshrc"
+rm "$HOME/.zsh_aliases"
+rm "$HOME/.p10k.zsh"
+
+rm "$HOME/.gitconfig"
+rm "$HOME/.gitignore"
+
+rm "$HOME/.doom.d/config.el"
+rm "$HOME/.doom.d/init.el"
+rm "$HOME/.doom.d/packages.el"
+
+
 ln -s "$location/.zshrc" "$HOME/.zshrc"
 ln -s "$location/.zsh_aliases" "$HOME/.zsh_aliases"
 ln -s "$location/.p10k.zsh" "$HOME/.p10k.zsh"
