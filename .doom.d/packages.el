@@ -55,3 +55,5 @@
 (package! visual-fill-column)
 
 (package! autopair :recipe (:host github :repo "joaotavora/autopair"))
+
+(package! dtrt-indent :disable t)
