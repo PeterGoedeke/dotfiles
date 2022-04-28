@@ -1,0 +1,19 @@
+#+title: Dotfiles
+
+* Install
+
+The ~install.sh~ script will install all required libraries and packages which are part of my configuration.
+
+The ~link.sh~ script will remove all conflicting pre-existing dotfiles repository and replace them with symlinks to the dotfiles in this repository.
+
+Clone this repository and ~cd~ to the root folder and run:
+
+#+BEGIN_SRC bash
+chmod +x .setup/* && .setup :/install.sh && .setup/link.sh
+#+END_SRC
+
+I also recommend changing shell to ~zsh~:
+
+#+BEGIN_SRC bash
+chsh -s $(which zsh)
+#+END_SRC
