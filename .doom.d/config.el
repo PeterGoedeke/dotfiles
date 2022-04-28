@@ -84,9 +84,25 @@ same directory as the org-buffer and insert a link to this file."
   (insert (concat "[[" filename "]]"))
   (org-display-inline-images))
 
+  (defun insert-type ()
+    "Display the type signature and documentation of the thing at
+point."
+    (interactive)
+    (let ((contents (-some->> (lsp--text-document-position-params)
+                      (lsp--make-request "textDocument/hover")
+                      (lsp--send-request)
+                      (lsp:hover-contents))))
+      (if (and contents (not (equal contents "")))
+          (progn
+            (evil-previous-line)
+            (newline)
+            (insert (string-trim-right (lsp--render-on-hover-content contents t))))
+        (lsp--info "No content at point."))))
+
 (map! :leader
       (:prefix-map ("a" . "user")
-       :desc "browse" "a" #'browse-url))
+       :desc "browse" "a" #'browse-url
+       :desc "type" "t" #'insert-type))
 (map! :leader
       "0" #'treemacs-select-window
       "1" #'winum-select-window-1
