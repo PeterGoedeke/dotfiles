@@ -57,3 +57,5 @@
 (package! autopair :recipe (:host github :repo "joaotavora/autopair"))
 
 (package! dtrt-indent :disable t)
+
+(package! ace-jump-mode)

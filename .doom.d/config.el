@@ -102,7 +102,9 @@ point."
 (map! :leader
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url
-       :desc "type" "t" #'insert-type))
+       :desc "type" "t" #'insert-type)
+      :desc "jump" "j" #'evil-avy-goto-word-1)
+
 (map! :leader
       "0" #'treemacs-select-window
       "1" #'winum-select-window-1
@@ -121,7 +123,10 @@ point."
  :nv "j" #'evil-next-visual-line
  :nv "k" #'evil-previous-visual-line
  :nv "*" #'evil-ex-search-word-backward
+ :nv "ga" #'ace-jump-mode
  :v "s" #'evil-surround-region)
+
+(evil-add-command-properties #'ace-jump-mode :jump t)
 
 (setq display-line-numbers-type 'relative)
 
