@@ -43,25 +43,27 @@
 (setq org-directory "~/Dropbox/org/")
 (setq org-agenda-files '("~/Dropbox/org/main.org"))
 
-(setq org-capture-templates '(("t" "Todo [general]" entry
-                                (file+headline "~/Dropbox/org/inbox.org" "General")
-                                "** TODO %i%?")
-                        ("o" "Todo [obligations]" entry
-                                (file+headline "~/Dropbox/org/main.org" "Obligations")
-                                "** TODO %i%?")
-                        ("r" "Todo [reflection]" entry
-                                (file+headline "~/Dropbox/org/main.org" "Reflection")
-                                "** TODO %i%?")
-                        ("e" "Todo [dev environment]" entry
-                                (file+headline "~/Dropbox/org/main.org" "Dotfiles")
-                                "** TODO %i%?")))
+(after! org
+  (setq org-capture-templates '(("t" "Todo [general]" entry
+                                 (file+headline "~/Dropbox/org/inbox.org" "General")
+                                 "** TODO %i%?")
+                                ("o" "Todo [obligations]" entry
+                                 (file+headline "~/Dropbox/org/main.org" "Obligations")
+                                 "** TODO %i%?")
+                                ("r" "Todo [reflection]" entry
+                                 (file+headline "~/Dropbox/org/main.org" "Reflection")
+                                 "** TODO %i%?")
+                                ("e" "Todo [dev environment]" entry
+                                 (file+headline "~/Dropbox/org/main.org" "Dotfiles")
+                                 "** TODO %i%?")))
 
-(setq org-refile-targets '((nil :maxlevel . 1)
-                        ("~/Dropbox/org/main.org" :maxlevel . 1)
-                        ("~/Dropbox/org/main.org" :tag . "project")
-                        ("~/Dropbox/org/someday.org" :level . 1)
-                        ("~/Dropbox/org/reminder.org" :maxlevel . 2)
-                        ("~/Dropbox/org/elfeed.org" :maxlevel . 1)))
+  (setq org-refile-targets '((nil :maxlevel . 1)
+                             ("~/Dropbox/org/main.org" :maxlevel . 1)
+                             ("~/Dropbox/org/main.org" :tag . "project")
+                             ("~/Dropbox/org/someday.org" :level . 1)
+                             ("~/Dropbox/org/reminder.org" :maxlevel . 2)
+                             ("~/Dropbox/org/elfeed.org" :maxlevel . 1)))
+  )
 
 (setq scroll-margin 20)
 ;; (setq scroll-conservatively 101)
