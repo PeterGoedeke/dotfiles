@@ -87,6 +87,17 @@ same directory as the org-buffer and insert a link to this file."
 (map! :leader
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url))
+(map! :leader
+      "0" #'treemacs-select-window
+      "1" #'winum-select-window-1
+      "2" #'winum-select-window-2
+      "3" #'winum-select-window-3
+      "4" #'winum-select-window-4
+      "5" #'winum-select-window-5
+      "6" #'winum-select-window-6
+      "7" #'winum-select-window-7
+      "8" #'winum-select-window-8
+      "9" #'winum-select-window-9)
 
 (map!
  :nv "0" #'evil-first-non-blank
