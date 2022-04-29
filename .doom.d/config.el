@@ -41,7 +41,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/org/")
-(setq org-agenda-files '("~/Dropbox/org/main.org"))
+(setq org-agenda-files '("~/Dropbox/org/main.org" "~/Dropbox/org/habits.org"))
 
 (setq org-agenda-prefix-format
       '((agenda  . " %i %-12:c%?-12t% s")
@@ -58,6 +58,10 @@
  (tags deadline-up)
  (search category-keep)))
 
+(require 'org-habit)
+(add-to-list 'org-modules 'org-habit)
+
+(setq org-habit-following-days 1)
 
 (after! org
   (setq org-capture-templates '(("t" "Todo [general]" entry
