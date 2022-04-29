@@ -43,6 +43,22 @@
 (setq org-directory "~/Dropbox/org/")
 (setq org-agenda-files '("~/Dropbox/org/main.org"))
 
+(setq org-agenda-prefix-format
+      '((agenda  . " %i %-12:c%?-12t% s")
+        (todo  . "%?-4:(seq-elt (org-get-outline-path) 1) %?-10(let ((deadline (org-get-deadline-time (point)))) (if deadline (format-time-string \"%Y-%m-%d\" deadline) \"\")) ")
+        (tags  . "%?-4:(seq-elt (org-get-outline-path) 1) %?-10(let ((deadline (org-get-deadline-time (point)))) (if deadline (format-time-string \"%Y-%m-%d\" deadline) \"\")) ")
+        (tags  . " %i %-12:c")
+        (search . " %i %-12:c")))
+
+(setq org-agenda-custom-commands
+      '(("n" "uni" tags "+uni+TODO=\"TODO\"")))
+
+(setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
+ (todo deadline-up)
+ (tags deadline-up)
+ (search category-keep)))
+
+
 (after! org
   (setq org-capture-templates '(("t" "Todo [general]" entry
                                  (file+headline "~/Dropbox/org/inbox.org" "General")
