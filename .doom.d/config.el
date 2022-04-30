@@ -83,7 +83,11 @@
                              ("~/Dropbox/org/someday.org" :level . 1)
                              ("~/Dropbox/org/reminder.org" :maxlevel . 2)
                              ("~/Dropbox/org/elfeed.org" :maxlevel . 1)))
-  )
+)
+
+(map! :after org
+      :map evil-org-agenda-mode-map
+      :m "K" #'org-habit-toggle-habits)
 
 (setq scroll-margin 20)
 ;; (setq scroll-conservatively 101)
