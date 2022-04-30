@@ -43,6 +43,21 @@
 (setq org-directory "~/Dropbox/org/")
 (setq org-agenda-files '("~/Dropbox/org/main.org" "~/Dropbox/org/habits.org"))
 
+(defun days-since-last-repeat ()
+  "Returns the number of full days which have passed since the last repeat of
+the org heading at ~(point)~. If there is no repeat an empty string is returned"
+  (interactive)
+  (let* ((raw-timestamp (org-entry-get (point) "LAST_REPEAT"))
+         (now-days (string-to-number (format-seconds "%d" (current-time)))))
+    (message (if raw-timestamp
+                 (let*
+                     ((timestamp (substring raw-timestamp 1 -1))
+                      (seconds (seconds-to-time (org-time-string-to-seconds timestamp)))
+                      (last-repeat-days (string-to-number (format-seconds "%d" seconds)))
+                      (diff-days (- now-days last-repeat-days)))
+                   (number-to-string diff-days))
+               ""))))
+
 (setq org-agenda-prefix-format
       '((agenda  . " %i %-12:c%?-12t% s")
         (todo  . "%?-4:(seq-elt (org-get-outline-path) 1) %?-10(let ((deadline (org-get-deadline-time (point)))) (if deadline (format-time-string \"%Y-%m-%d\" deadline) \"\")) ")
