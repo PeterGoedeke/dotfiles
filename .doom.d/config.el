@@ -59,17 +59,18 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
                ""))))
 
 (setq org-agenda-prefix-format
-      '((agenda  . " %i %-12:c%?-12t% s")
-        (todo  . "%?-4:(seq-elt (org-get-outline-path) 1) %?-10(let ((deadline (org-get-deadline-time (point)))) (if deadline (format-time-string \"%Y-%m-%d\" deadline) \"\")) ")
+      '((agenda  . " %i %-12:c%?-12t% s ")
+        (todo  . "%-4:(days-since-last-repeat)")
         (tags  . "%?-4:(seq-elt (org-get-outline-path) 1) %?-10(let ((deadline (org-get-deadline-time (point)))) (if deadline (format-time-string \"%Y-%m-%d\" deadline) \"\")) ")
-        (tags  . " %i %-12:c")
         (search . " %i %-12:c")))
 
 (setq org-agenda-custom-commands
-      '(("n" "uni" tags "+uni+TODO=\"TODO\"")))
+      '(("n" "uni" tags "+uni+TODO=\"TODO\"")
+        ("c" "catchups"
+         ((todo "" ((org-agenda-files '("catchups.org"))))))))
 
 (setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
- (todo deadline-up)
+ (todo scheduled-up)
  (tags deadline-up)
  (search category-keep)))
 
