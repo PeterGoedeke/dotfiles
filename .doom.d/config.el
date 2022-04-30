@@ -144,7 +144,8 @@ point."
  :nv "k" #'evil-previous-visual-line
  :nv "*" #'evil-ex-search-word-backward
  :nv "ga" #'ace-jump-mode
- :v "s" #'evil-surround-region)
+ :i  "C-h" #'evil-delete-backward-char
+ :v  "s" #'evil-surround-region)
 
 (evil-add-command-properties #'ace-jump-mode :jump t)
 
