@@ -105,6 +105,10 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
       :map evil-org-agenda-mode-map
       :m "K" #'org-habit-toggle-habits)
 
+(map! :after vterm
+      :map vterm-mode-map
+      :i "jk" #'evil-normal-state)
+
 (setq scroll-margin 20)
 ;; (setq scroll-conservatively 101)
 (setq evil-move-cursor-back nil)
