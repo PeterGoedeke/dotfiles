@@ -59,3 +59,5 @@
 (package! dtrt-indent :disable t)
 
 (package! ace-jump-mode)
+
+(package! color-identifiers-mode)

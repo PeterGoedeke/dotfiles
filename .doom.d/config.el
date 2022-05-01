@@ -193,6 +193,9 @@ point."
 (add-hook! 'LaTeX-mode-hook 'visual-fill-column-mode)
 (add-hook! 'org-mode-hook 'visual-fill-column-mode)
 
+(add-hook! 'c++-mode-hook 'color-identifiers-mode)
+(add-hook 'after-init-hook 'global-color-identifiers-mode)
+
 (setq c-offsets-alist '((innamespace . 0)
                         (access-label . /)
                         (inclass . +)))
