@@ -219,6 +219,8 @@ point."
 
 (setq magit-clone-default-directory "~/Documents/github/")
 
+(setq org-superstar-headline-bullets-list '(9673 9675))
+
 ;; (after! evil-mode
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
