@@ -109,6 +109,10 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
       :map vterm-mode-map
       :i "jk" #'evil-normal-state)
 
+(map! :map dired-mode-map
+      :nv "h" #'dired-up-directory
+      :nv "l" #'dired-find-file)
+
 (setq scroll-margin 20)
 ;; (setq scroll-conservatively 101)
 (setq evil-move-cursor-back nil)
@@ -159,7 +163,8 @@ point."
       "6" #'winum-select-window-6
       "7" #'winum-select-window-7
       "8" #'winum-select-window-8
-      "9" #'winum-select-window-9)
+      "9" #'winum-select-window-9
+      ";" #'+workspace/switch-to)
 
 (map!
  :nv "0" #'evil-first-non-blank
