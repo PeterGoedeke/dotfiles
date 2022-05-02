@@ -83,14 +83,11 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
   (setq org-capture-templates '(("t" "Todo [general]" entry
                                  (file+headline "~/Dropbox/org/inbox.org" "General")
                                  "** TODO %i%?")
-                                ("o" "Todo [obligations]" entry
-                                 (file+headline "~/Dropbox/org/main.org" "Obligations")
+                                ("d" "Todo [dotfiles]" entry
+                                 (file+headline "~/Dropbox/org/inbox.org" "Dotfiles")
                                  "** TODO %i%?")
                                 ("r" "Todo [reflection]" entry
-                                 (file+headline "~/Dropbox/org/main.org" "Reflection")
-                                 "** TODO %i%?")
-                                ("e" "Todo [dev environment]" entry
-                                 (file+headline "~/Dropbox/org/main.org" "Dotfiles")
+                                 (file+headline "~/Dropbox/org/inbox.org" "Reflection")
                                  "** TODO %i%?")))
 
   (setq org-refile-targets '((nil :maxlevel . 1)
