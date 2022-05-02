@@ -148,7 +148,11 @@ point."
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url
        :desc "type" "t" #'insert-type)
-      :desc "jump" "j" #'evil-avy-goto-word-1)
+      :desc "jump" "j" #'evil-avy-goto-word-1
+      (:prefix-map ("d" . "directory")
+       :desc "ranger" "d" #'ranger))
+
+(setq ranger-show-hidden t)
 
 (map! :leader
       "0" #'treemacs-select-window
