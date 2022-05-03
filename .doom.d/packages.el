@@ -55,6 +55,7 @@
 (package! visual-fill-column)
 
 (package! autopair :recipe (:host github :repo "joaotavora/autopair"))
+(package! emacs-bazel-mode :recipe (:host github :repo "bazelbuild/emacs-bazel-mode"))
 
 (package! dtrt-indent :disable t)
 
