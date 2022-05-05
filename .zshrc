@@ -78,20 +78,21 @@ ENABLE_CORRECTION="false"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	autojump
-	copybuffer
-	dirhistory
-	git
-	web-search
-	zsh-autosuggestions
-	zsh-completions
-	zsh-history-substring-search
-	zsh-syntax-highlighting
-    colored-man-pages
-    colorize
-    copypath
-    copyfile
-    jump
+  autojump
+  copybuffer
+  dirhistory
+  git
+  web-search
+  zsh-autosuggestions
+  zsh-completions
+  zsh-history-substring-search
+  zsh-syntax-highlighting
+  colored-man-pages
+  colorize
+  copypath
+  copyfile
+  jump
+  zsh-vi-mode
 )
 autoload -U compinit && compinit
 
@@ -125,6 +126,9 @@ source /etc/zsh_command_not_found
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 PROMPT='λ: '
+
+KEYTIMEOUT=1
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
