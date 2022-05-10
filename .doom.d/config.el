@@ -110,6 +110,9 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
       :nv "h" #'dired-up-directory
       :nv "l" #'dired-find-file)
 
+(map! :map ranger-normal-mode-map
+      :g "c" #'dired-create-empty-file)
+
 (setq scroll-margin 20)
 ;; (setq scroll-conservatively 101)
 (setq evil-move-cursor-back nil)
