@@ -211,16 +211,6 @@ point."
   :config
   (autopair-global-mode))
 
-(after! evil-surround
-  (let ((pairs '((?j "[" . "]")
-                 (?k "(" . ")")
-                 (?l "{" . "}")
-                 (?\; "<" . ">")
-                 (?g "'" . "'")
-                 (?h "\"" . "\""))))
-    (prependq! evil-surround-pairs-alist pairs)
-    (prependq! evil-embrace-evil-surround-keys (mapcar #'car pairs))))
-
 (setq magit-clone-default-directory "~/Documents/github/")
 
 (setq org-superstar-headline-bullets-list '(9673 9675))
