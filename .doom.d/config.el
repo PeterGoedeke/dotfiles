@@ -113,6 +113,12 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
 (map! :map ranger-normal-mode-map
       :g "c" #'dired-create-empty-file)
 
+(map! :map evil-inner-text-objects-map
+      :g "b" #'evil-textobj-anyblock-inner-block)
+
+(map! :map evil-operator-state-map
+      :g "b" #'evil-textobj-anyblock-inner-block)
+
 (setq scroll-margin 20)
 ;; (setq scroll-conservatively 101)
 (setq evil-move-cursor-back nil)
