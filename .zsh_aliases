@@ -1,6 +1,8 @@
 alias lh='ls -lhrt'
 alias lha='ls -lhrta'
+
 alias c='clear'
 alias v='vim'
-alias ag='sudo apt-get'
-alias a='sudo apt'
+
+alias less=cless
+alias cat=ccat
