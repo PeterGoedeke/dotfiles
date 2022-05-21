@@ -234,7 +234,14 @@ does not exist"
 (add-hook 'bazel-mode-hook #'company-mode)
 (remove-hook 'company-mode-hook #'text-mode)
 
-(setq company-idle-delay 0)
+(setq company-idle-delay 0.01)
+(setq company-require-match nil)
+(setq company-tooltip-limit 4)
+
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "TAB") #'company-complete-selection)
+  (define-key company-active-map (kbd "<tab>") #'company-complete-selection))
+
 ;; (after! evil-mode
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
