@@ -231,6 +231,7 @@ does not exist"
 (setq org-hide-emphasis-markers t)
 
 (add-to-list 'company-global-modes 'text-mode)
+(add-hook 'bazel-mode-hook #'company-mode)
 (remove-hook 'company-mode-hook #'text-mode)
 
 (setq company-idle-delay 0)
