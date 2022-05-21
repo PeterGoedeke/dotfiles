@@ -153,11 +153,19 @@ point."
             (insert (string-trim-right (lsp--render-on-hover-content contents t))))
         (lsp--info "No content at point."))))
 
+(defun open-bazel-file ()
+  "Open the BUILD.bazel file in the directory or create it if it
+does not exist"
+  (interactive)
+  (find-file "BUILD.bazel"))
+
 (map! :leader
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url
        :desc "type" "t" #'insert-type)
       :desc "jump" "j" #'evil-avy-goto-word-1
+      :desc "other" "fo" #'lsp-clangd-find-other-file
+      :desc "bazel" "fb" #'open-bazel-file
       (:prefix-map ("d" . "directory")
        :desc "ranger" "d" #'ranger))
 
