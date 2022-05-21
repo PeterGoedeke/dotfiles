@@ -90,7 +90,7 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
                                  (file+headline "~/Dropbox/org/inbox.org" "Reflection")
                                  "** TODO %i%?")))
 
-  (setq org-refile-targets '((nil :maxlevel . 1)
+  (setq org-refile-targets '((nil :maxlevel . 2)
                              ("~/Dropbox/org/main.org" :maxlevel . 1)
                              ("~/Dropbox/org/main.org" :tag . "project")
                              ("~/Dropbox/org/someday.org" :level . 1)
