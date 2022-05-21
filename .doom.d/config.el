@@ -242,6 +242,8 @@ does not exist"
   (define-key company-active-map (kbd "TAB") #'company-complete-selection)
   (define-key company-active-map (kbd "<tab>") #'company-complete-selection))
 
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 ;; (after! evil-mode
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
