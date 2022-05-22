@@ -159,6 +159,13 @@ does not exist"
   (interactive)
   (find-file "BUILD.bazel"))
 
+(defun toggle-theme ()
+  "Toggle between the doom-one theme and the doom-one-light theme"
+  (interactive)
+  (if (equal doom-theme 'doom-one)
+      (load-theme 'doom-one-light)
+    (load-theme 'doom-one)))
+
 (map! :leader
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url
