@@ -166,6 +166,7 @@ does not exist"
       :desc "jump" "j" #'evil-avy-goto-word-1
       :desc "other" "fo" #'lsp-clangd-find-other-file
       :desc "bazel" "fb" #'open-bazel-file
+      :desc "toggle theme" "tt" #'toggle-theme
       (:prefix-map ("d" . "directory")
        :desc "ranger" "d" #'ranger))
 
