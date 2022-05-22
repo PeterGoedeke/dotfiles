@@ -193,6 +193,7 @@ does not exist"
  :nv "*" #'evil-ex-search-word-backward
  :nv "ga" #'ace-jump-mode
  :i  "C-h" #'evil-delete-backward-char
+ :i  "C-t" #'yas-insert-snippet
  :v  "s" #'evil-surround-region)
 
 (evil-add-command-properties #'ace-jump-mode :jump t)
