@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: qout
+# key: qout
+# --
+std::cout << $0 << std::endl;
