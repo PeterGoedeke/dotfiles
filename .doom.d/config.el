@@ -220,7 +220,7 @@ does not exist"
 (add-hook! 'LaTeX-mode-hook 'visual-fill-column-mode)
 (add-hook! 'org-mode-hook 'visual-fill-column-mode)
 
-(add-hook! 'c++-mode-hook 'color-identifiers-mode)
+(add-hook! 'c++-mode-hook 'tree-sitter-hl-mode)
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
 
 (setq c-offsets-alist '((innamespace . 0)
@@ -253,6 +253,10 @@ does not exist"
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+
+(after! tree-sitter
+        (global-tree-sitter-mode)
+  )
 ;; (after! evil-mode
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)

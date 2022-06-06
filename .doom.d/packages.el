@@ -62,3 +62,6 @@
 (package! ace-jump-mode)
 
 (package! color-identifiers-mode)
+(package! tree-sitter)
+(package! tree-sitter-langs)
+
