@@ -2,8 +2,11 @@
 
 *.log
 *#
+*.swp
+
 .projectile
 .idea
 .vscode
+
 TODOs.org
-*.swp
+notes.org
