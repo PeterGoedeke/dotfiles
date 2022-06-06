@@ -62,6 +62,8 @@
 (package! ace-jump-mode)
 
 (package! color-identifiers-mode)
+
+(package! doom-snippets :ignore t)
 (package! tree-sitter)
 (package! tree-sitter-langs)
 
