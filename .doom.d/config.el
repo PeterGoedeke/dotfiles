@@ -258,6 +258,8 @@ does not exist"
 (after! tree-sitter
         (global-tree-sitter-mode)
   )
+
+(setq display-line-numbers-type nil)
 ;; (after! evil-mode
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
