@@ -169,6 +169,12 @@ does not exist"
       (load-theme 'doom-one-light)
     (load-theme 'doom-one)))
 
+
+(defun directory-to-files (DIRECTORY)
+  "Yeet"
+  (mapcar (lambda (FILE) (concat  DIRECTORY "/" FILE))
+          (projectile-dir-files
+           (concat (projectile-project-root) DIRECTORY))))
 (map! :leader
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url
