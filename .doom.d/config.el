@@ -193,6 +193,15 @@ does not exist"
           (forward-line)))
       (nreverse (mapcar (lambda (x) (nreverse x)) groups)))))
 
+(defun projectile-search-subproject ()
+  (interactive)
+  (let* ((project-root (projectile-acquire-root))
+         (groups (parse-subproject-config-file project-root))
+         (files (cdr (assoc (completing-read "Choose: " groups) groups)))
+         (file (projectile-completing-read "Woah" (directories-to-files files))))
+    (find-file (expand-file-name file project-root))))
+
+
 (map! :leader
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url
