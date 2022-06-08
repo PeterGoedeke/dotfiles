@@ -180,6 +180,19 @@ does not exist"
   "List the files in DIRECTORIES and in their sub-directories"
   (mapcan #'directory-to-files DIRECTORIES))
 
+(defun parse-subproject-config-file (project-root)
+  "Owo"
+  (let (groups (groupsfile (concat project-root "/.groups")))
+    (when (projectile-file-exists-p groupsfile)
+      (with-temp-buffer
+        (insert-file-contents groupsfile)
+        (while (not (eobp))
+          (pcase (char-after)
+            (?! (push (cons (buffer-substring (1+ (point)) (line-end-position)) nil) groups))
+            (_ (push (buffer-substring (point) (line-end-position)) (car groups))))
+          (forward-line)))
+      (nreverse (mapcar (lambda (x) (nreverse x)) groups)))))
+
 (map! :leader
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url
