@@ -83,6 +83,9 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
   (setq org-capture-templates '(("t" "Todo [general]" entry
                                  (file+headline "~/Dropbox/org/inbox.org" "General")
                                  "** TODO %i%?")
+                                ("s" "Todo [study]" entry
+                                 (file+headline "~/Dropbox/org/inbox.org" "Study")
+                                 "** TODO %i%?")
                                 ("d" "Todo [dotfiles]" entry
                                  (file+headline "~/Dropbox/org/inbox.org" "Dotfiles")
                                  "** TODO %i%?")
