@@ -210,6 +210,8 @@ does not exist"
       :desc "other" "fo" #'lsp-clangd-find-other-file
       :desc "bazel" "fb" #'open-bazel-file
       :desc "undo" "fu" #'recentf-open-most-recent-file
+      :desc "Save project files" "pS" #'projectile-save-project-buffers
+      :desc "Search subdirectory" "ps" #'projectile-search-subproject
       :desc "toggle theme" "tt" #'toggle-theme
       (:prefix-map ("d" . "directory")
        :desc "ranger" "d" #'ranger))
