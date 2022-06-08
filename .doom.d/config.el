@@ -101,6 +101,16 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
                              ("~/Dropbox/org/elfeed.org" :maxlevel . 1)))
 )
 
+
+(defun swap-between-source-header ()
+  (interactive)
+  (let* ((file (buffer-file-name))
+        (extension (file-name-extension file))
+        (bare-file (file-name-sans-extension file)))
+    (if (string= extension "h")
+        (switch-to-buffer (find-file-noselect (concat bare-file ".cpp")))
+        (switch-to-buffer (find-file-noselect (concat bare-file ".h"))))))
+
 (map! :after org
       :map evil-org-agenda-mode-map
       :m "K" #'org-habit-toggle-habits)
@@ -207,7 +217,7 @@ does not exist"
        :desc "browse" "a" #'browse-url
        :desc "type" "t" #'insert-type)
       :desc "jump" "j" #'evil-avy-goto-word-1
-      :desc "other" "fo" #'lsp-clangd-find-other-file
+      :desc "other" "fo" #'swap-between-source-header
       :desc "bazel" "fb" #'open-bazel-file
       :desc "undo" "fu" #'recentf-open-most-recent-file
       :desc "Save project files" "pS" #'projectile-save-project-buffers
