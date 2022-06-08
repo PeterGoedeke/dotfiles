@@ -175,6 +175,11 @@ does not exist"
   (mapcar (lambda (FILE) (concat  DIRECTORY "/" FILE))
           (projectile-dir-files
            (concat (projectile-project-root) DIRECTORY))))
+
+(defun directories-to-files (DIRECTORIES)
+  "List the files in DIRECTORIES and in their sub-directories"
+  (mapcan #'directory-to-files DIRECTORIES))
+
 (map! :leader
       (:prefix-map ("a" . "user")
        :desc "browse" "a" #'browse-url
