@@ -270,6 +270,8 @@ does not exist"
 (add-hook! 'org-mode-hook 'visual-fill-column-mode)
 
 (add-hook! 'c++-mode-hook 'tree-sitter-hl-mode)
+(add-hook! 'prisma-mode-hook 'lsp)
+
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
 
 (setq c-offsets-alist '((innamespace . 0)
