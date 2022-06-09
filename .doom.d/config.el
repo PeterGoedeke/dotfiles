@@ -295,6 +295,8 @@ does not exist"
 (setq company-idle-delay 0.01)
 (setq company-require-match nil)
 (setq company-tooltip-limit 4)
+(setq lsp-signature-auto-activate nil)
+
 
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "TAB") #'company-complete-selection)
