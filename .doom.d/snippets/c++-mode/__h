@@ -1,0 +1,6 @@
+# -*- mode: template -*-
+# name: __h
+# key: __h
+# condition: t
+# --
+#pragma once
