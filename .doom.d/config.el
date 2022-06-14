@@ -316,6 +316,11 @@ does not exist"
 (setq display-line-numbers-type nil)
 
 (set-file-template! "\\.\\(h\\|hpp\\)$" :trigger "__h" :mode 'c++-mode)
+
+(after! evil-args
+        (add-to-list 'evil-args-closers ">")
+        (add-to-list 'evil-args-openers "<"))
+
 ;; (after! evil-mode
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 ;;         (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
