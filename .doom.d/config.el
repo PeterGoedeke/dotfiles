@@ -107,9 +107,11 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
   (let* ((file (buffer-file-name))
         (extension (file-name-extension file))
         (bare-file (file-name-sans-extension file)))
-    (if (string= extension "h")
-        (switch-to-buffer (find-file-noselect (concat bare-file ".cpp")))
-        (switch-to-buffer (find-file-noselect (concat bare-file ".h"))))))
+    (if (or (string= extension "h") (string= extension "cpp"))
+        (if (string= extension "h")
+                (switch-to-buffer (find-file-noselect (concat bare-file ".cpp")))
+                (switch-to-buffer (find-file-noselect (concat bare-file ".h"))))
+      (message "Current buffer is not a C++ source or header file"))))
 
 (map! :after org
       :map evil-org-agenda-mode-map
