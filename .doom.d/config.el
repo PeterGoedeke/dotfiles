@@ -295,6 +295,7 @@ does not exist"
 (add-to-list 'company-global-modes 'text-mode)
 (add-hook 'bazel-mode-hook #'company-mode)
 (remove-hook 'company-mode-hook #'text-mode)
+(add-hook 'company-mode-hook #'company-prescient-mode)
 
 (setq company-idle-delay 0.01)
 (setq company-require-match nil)

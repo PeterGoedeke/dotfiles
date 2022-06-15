@@ -67,3 +67,5 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 
+(package! prescient)
+(package! company-prescient)
