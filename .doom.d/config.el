@@ -271,7 +271,7 @@ does not exist"
 (add-hook! 'LaTeX-mode-hook 'visual-fill-column-mode)
 (add-hook! 'org-mode-hook 'visual-fill-column-mode)
 
-(add-hook! 'c++-mode-hook 'tree-sitter-hl-mode)
+(add-hook! 'prog-mode-hook 'tree-sitter-hl-mode)
 (add-hook! 'prisma-mode-hook 'lsp)
 
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
