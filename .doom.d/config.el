@@ -280,6 +280,8 @@ does not exist"
                         (access-label . /)
                         (inclass . +)))
 
+(setq org-image-actual-width (list 800))
+
 (after! cc-mode (setq c-basic-offset 2))
 
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
