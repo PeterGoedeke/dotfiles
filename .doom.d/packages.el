@@ -69,3 +69,5 @@
 
 (package! prescient)
 (package! company-prescient)
+
+(package! rmsbolt)
