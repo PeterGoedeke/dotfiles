@@ -40,8 +40,9 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Dropbox/org/")
-(setq org-agenda-files '("~/Dropbox/org/main.org" "~/Dropbox/org/habits.org"))
+(setq org-directory "~/Nextcloud/org/")
+(setq org-agenda-files '("~/Nextcloud/org/main.org" "~/Nextcloud/org/habits.org"))
+
 
 (defun days-since-last-repeat ()
   "Returns the number of full days which have passed since the last repeat of
@@ -81,24 +82,24 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
 
 (after! org
   (setq org-capture-templates '(("t" "Todo [general]" entry
-                                 (file+headline "~/Dropbox/org/inbox.org" "General")
+                                 (file+headline "~/Nextcloud/org/inbox.org" "General")
                                  "** TODO %i%?")
                                 ("s" "Todo [study]" entry
-                                 (file+headline "~/Dropbox/org/inbox.org" "Study")
+                                 (file+headline "~/Nextcloud/org/inbox.org" "Study")
                                  "** TODO %i%?")
                                 ("d" "Todo [dotfiles]" entry
-                                 (file+headline "~/Dropbox/org/inbox.org" "Dotfiles")
+                                 (file+headline "~/Nextcloud/org/inbox.org" "Dotfiles")
                                  "** TODO %i%?")
                                 ("r" "Todo [reflection]" entry
-                                 (file+headline "~/Dropbox/org/inbox.org" "Reflection")
+                                 (file+headline "~/Nextcloud/org/inbox.org" "Reflection")
                                  "** TODO %i%?")))
 
   (setq org-refile-targets '((nil :maxlevel . 2)
-                             ("~/Dropbox/org/main.org" :maxlevel . 1)
-                             ("~/Dropbox/org/main.org" :tag . "project")
-                             ("~/Dropbox/org/someday.org" :level . 1)
-                             ("~/Dropbox/org/reminder.org" :maxlevel . 2)
-                             ("~/Dropbox/org/elfeed.org" :maxlevel . 1)))
+                             ("~/Nextcloud/org/main.org" :maxlevel . 1)
+                             ("~/Nextcloud/org/main.org" :tag . "project")
+                             ("~/Nextcloud/org/someday.org" :level . 1)
+                             ("~/Nextcloud/org/reminder.org" :maxlevel . 2)
+                             ("~/Nextcloud/org/elfeed.org" :maxlevel . 1)))
 )
 
 
