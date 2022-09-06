@@ -43,6 +43,8 @@
 (setq org-directory "~/Nextcloud/org/")
 (setq org-agenda-files '("~/Nextcloud/org/main.org" "~/Nextcloud/org/habits.org"))
 
+(setq vterm-shell "/usr/bin/fish")
+
 
 (defun days-since-last-repeat ()
   "Returns the number of full days which have passed since the last repeat of
