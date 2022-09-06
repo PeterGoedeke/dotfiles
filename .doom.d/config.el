@@ -45,6 +45,11 @@
 
 (setq vterm-shell "/usr/bin/fish")
 
+(use-package projectile
+  :ensure t
+  :init
+  (require 'tramp)
+  (projectile-mode +1))
 
 (defun days-since-last-repeat ()
   "Returns the number of full days which have passed since the last repeat of
