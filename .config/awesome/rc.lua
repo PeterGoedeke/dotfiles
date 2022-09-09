@@ -353,16 +353,16 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "w", function () awful.util.spawn("rofi -show window") end,
+    awful.key({ modkey },            "w", function () awful.spawn.with_shell("rofi -show window") end,
               {description = "select a window", group = "launcher"}),
 
-    awful.key({ modkey },            "a", function () awful.util.spawn("rofi -show combi") end,
+    awful.key({ modkey },            "a", function () awful.spawn.with_shell("rofi -show combi") end,
               {description = "select window or start program", group = "launcher"}),
 
-    awful.key({ modkey, "Ctrl"   }, "s", function () awful.util.spawn("rofi -show ssh") end,
+    awful.key({ modkey, "Ctrl"   }, "s", function () awful.spawn.with_shell("rofi -show ssh") end,
               {description = "connect to an ssh server", group = "launcher"}),
 
-    awful.key({ modkey }, "v", function () awful.util.spawn("rofi -show filebrowser") end,
+    awful.key({ modkey }, "v", function () awful.spawn.with_shell("rofi -show filebrowser") end,
               {description = "browse files", group = "launcher"}),
 
     awful.key({ modkey },            "e",     function () awful.util.spawn("emacs") end,
