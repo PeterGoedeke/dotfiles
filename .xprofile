@@ -1,4 +1,8 @@
 export FONTCONFIG_PATH=/etc/fonts
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
+light-locker &
+nm-applet &
+nextcloud &
+redshift -PO 1500K
 exec awesome
