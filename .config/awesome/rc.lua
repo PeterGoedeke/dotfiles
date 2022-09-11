@@ -412,7 +412,7 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, "v", function() open_or_focus("Discord") end,
     { description = "launch or focus disord", group = "applications" }),
 
-  awful.key({ modkey }, "b", function() open_or_focus("Google Chrome", "google-chrome-stable") end,
+  awful.key({ modkey }, "b", function() open_or_focus("Mozilla Firefox", "firefox") end,
     { description = "launch or focus browser", group = "applications" }),
 
   awful.key({ modkey }, "e", function() open_or_focus("Doom Emacs", "emacs") end,
