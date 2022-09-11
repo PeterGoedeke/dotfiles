@@ -15,6 +15,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
+local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
@@ -156,15 +157,6 @@ myweather_widget = weather_widget({
   timeout = 1200
 })
 
-local song_widget = wibox.widget {
-  {
-    awful.widget.watch('sp current', 2),
-    right = 10,
-    widget = wibox.container.margin
-  },
-  widget = wibox.container.background
-}
-
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
   awful.button({}, 1, function(t) t:view_only() end),
@@ -278,7 +270,9 @@ awful.screen.connect_for_each_screen(function(s)
     },
     s.mytasklist, -- Middle widget
     { -- Right widgets
-      song_widget,
+      spotify_widget({
+          max_length = -1
+      }),
       ram_widget(),
       net_speed_widget({
         timeout = 4
