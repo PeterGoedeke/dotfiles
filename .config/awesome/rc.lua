@@ -303,7 +303,7 @@ globalkeys = gears.table.join(
     { description = "view previous", group = "tag" }),
   awful.key({ modkey, }, "f", awful.tag.viewnext,
     { description = "view next", group = "tag" }),
-  awful.key({ modkey, }, "Escape", awful.tag.history.restore,
+  awful.key({ modkey, }, "space", awful.tag.history.restore,
     { description = "go back", group = "tag" }),
 
   awful.key({ modkey, }, "j",
@@ -339,17 +339,17 @@ globalkeys = gears.table.join(
     end,
     { description = "go back", group = "client" }),
 
-  awful.key({ modkey, }, "space",
-    function()
-      local c = awful.client.focus.history.list[2]
-      client.focus = c
-      local t = client.focus and client.focus.first_tag or nil
-      if t then
-        t:view_only()
-      end
-      c:raise()
-    end,
-    { description = "go back", group = "client" }),
+  -- awful.key({ modkey, }, "space",
+  --   function()
+  --     local c = awful.client.focus.history.list[2]
+  --     client.focus = c
+  --     local t = client.focus and client.focus.first_tag or nil
+  --     if t then
+  --       t:view_only()
+  --     end
+  --     c:raise()
+  --   end,
+  --   { description = "go back", group = "client" }),
 
   -- Standard program
   awful.key({ modkey, }, "Return", function() awful.spawn(terminal) end,
