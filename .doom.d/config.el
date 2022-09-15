@@ -108,6 +108,8 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
                 ((org-agenda-overriding-header "Next uni deadlines:")
                  (org-agenda-max-entries 5))))))))
 
+(setq evil-escape-excluded-major-modes '(neotree-mode treemacs-mode))
+
 (defun swap-between-source-header ()
   (interactive)
   (let* ((file (buffer-file-name))
