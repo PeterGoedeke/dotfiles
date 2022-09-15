@@ -41,9 +41,17 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Nextcloud/org/")
-(setq org-agenda-files '("~/Nextcloud/org/main.org" "~/Nextcloud/org/habits.org"))
+(setq org-agenda-files '("~/Nextcloud/org/main.org"))
 
-(setq vterm-shell "/usr/bin/fish")
+;; (cl-loop for file in '("/usr/bin/fish" "/usr/bin/zsh" "/usr/bin/bash" "/bin/bash")
+;;          when (file-exists-p file)
+;;          do (progn
+;;               (setq shell-file-name file)
+;;               (cl-return)))
+
+;; (setenv "SHELL" shell-file-name)
+
+;; (setq vterm-shell "/usr/bin/fish")
 
 (use-package projectile
   :ensure t
@@ -72,43 +80,33 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
         (tags  . "%?-4:(seq-elt (org-get-outline-path) 1) %?-10(let ((deadline (org-get-deadline-time (point)))) (if deadline (format-time-string \"%Y-%m-%d\" deadline) \"\")) ")
         (search . " %i %-12:c")))
 
-(setq org-agenda-custom-commands
-      '(("n" "uni" tags "+uni+TODO=\"TODO\"")
-        ("c" "catchups"
-         ((todo "" ((org-agenda-files '("catchups.org"))))))))
-
 (setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
  (todo scheduled-up)
  (tags deadline-up)
  (search category-keep)))
 
-(require 'org-habit)
-(add-to-list 'org-modules 'org-habit)
-
-(setq org-habit-following-days 1)
-
 (after! org
   (setq org-capture-templates '(("t" "Todo [general]" entry
                                  (file+headline "~/Nextcloud/org/inbox.org" "General")
                                  "** TODO %i%?")
-                                ("s" "Todo [study]" entry
-                                 (file+headline "~/Nextcloud/org/inbox.org" "Study")
-                                 "** TODO %i%?")
                                 ("d" "Todo [dotfiles]" entry
                                  (file+headline "~/Nextcloud/org/inbox.org" "Dotfiles")
-                                 "** TODO %i%?")
-                                ("r" "Todo [reflection]" entry
-                                 (file+headline "~/Nextcloud/org/inbox.org" "Reflection")
                                  "** TODO %i%?")))
-
   (setq org-refile-targets '((nil :maxlevel . 2)
                              ("~/Nextcloud/org/main.org" :maxlevel . 1)
-                             ("~/Nextcloud/org/main.org" :tag . "project")
-                             ("~/Nextcloud/org/someday.org" :level . 1)
-                             ("~/Nextcloud/org/reminder.org" :maxlevel . 2)
-                             ("~/Nextcloud/org/elfeed.org" :maxlevel . 1)))
-)
-
+                             ("~/Nextcloud/org/main.org" :tag . "project")))
+  (setq org-todo-keywords
+      '((sequence "NEXT(n)" "TODO(t)"  "|" "DONE(d)")))
+  (setq org-agenda-custom-commands
+      `(("l" "Weekly Log"
+         ((agenda "")
+          (tags "+TODO=\"NEXT\""
+                ((org-agenda-overriding-header "Next tasks:")
+                 (org-agenda-prefix-format
+                  '((tags . " %?-10:(seq-elt (org-get-outline-path) 1) %-12:c")))))
+          (tags "+uni+TODO=\"TODO\""
+                ((org-agenda-overriding-header "Next uni deadlines:")
+                 (org-agenda-max-entries 5))))))))
 
 (defun swap-between-source-header ()
   (interactive)
@@ -120,14 +118,6 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
                 (switch-to-buffer (find-file-noselect (concat bare-file ".cpp")))
                 (switch-to-buffer (find-file-noselect (concat bare-file ".h"))))
       (message "Current buffer is not a C++ source or header file"))))
-
-(map! :after org
-      :map evil-org-agenda-mode-map
-      :m "K" #'org-habit-toggle-habits)
-
-(map! :after vterm
-      :map vterm-mode-map
-      :i "jk" #'evil-normal-state)
 
 (map! :map dired-mode-map
       :nv "h" #'dired-up-directory
@@ -279,7 +269,7 @@ does not exist"
 (add-hook! 'LaTeX-mode-hook 'visual-fill-column-mode)
 (add-hook! 'org-mode-hook 'visual-fill-column-mode)
 
-(add-hook! 'prog-mode-hook 'tree-sitter-hl-mode)
+;; (add-hook! 'prog-mode-hook 'tree-sitter-hl-mode)
 (add-hook! 'prisma-mode-hook 'lsp)
 
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
