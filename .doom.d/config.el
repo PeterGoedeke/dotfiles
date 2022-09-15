@@ -137,7 +137,7 @@ the org heading at ~(point)~. If there is no repeat an empty string is returned"
 (setq scroll-margin 20)
 ;; (setq scroll-conservatively 101)
 (setq evil-move-cursor-back nil)
-(setq projectile-project-search-path '("~/Documents/github"))
+(setq projectile-project-search-path '("~/github"))
 
 (defun my-org-screenshot ()
   "Take a screenshot into a time stamped unique-named file in the
@@ -289,7 +289,7 @@ does not exist"
   :config
   (autopair-global-mode))
 
-(setq magit-clone-default-directory "~/Documents/github/")
+(setq magit-clone-default-directory "~/github/")
 
 (setq org-superstar-headline-bullets-list '(9673 9675))
 (setq org-hide-emphasis-markers t)
