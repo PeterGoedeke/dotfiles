@@ -64,8 +64,6 @@
 (package! color-identifiers-mode)
 
 (package! doom-snippets :ignore t)
-(package! tree-sitter)
-(package! tree-sitter-langs)
 
 (package! prescient)
 (package! company-prescient)
