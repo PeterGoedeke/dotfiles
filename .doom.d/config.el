@@ -276,13 +276,29 @@ does not exist"
 
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
 
-(setq c-offsets-alist '((innamespace . 0)
-                        (access-label . /)
-                        (inclass . +)))
+;; (setq c-offsets-alist '((innamespace . 0)
+;;                         (access-label . /)
+;;                         (inclass . +)))
 
 (setq org-image-actual-width (list 800))
 
-(after! cc-mode (setq c-basic-offset 2))
+;; (after! cc-mode (setq c-basic-offset 2))
+
+(defun peter-cc-style()
+  (c-set-style "linux")
+  (c-set-offset 'innamespace '0)
+  (c-set-offset 'inextern-lang '0)
+  (c-set-offset 'inline-open '0)
+  (c-set-offset 'func-decl-cont '0)
+  (c-set-offset 'label '*)
+  (c-set-offset 'case-label '*)
+  (c-set-offset 'access-label '/)
+  (setq c-basic-offset 2)
+  (setq tab-width 2)
+  (setq indent-tabs-mode nil)
+)
+
+(add-hook 'c++-mode-hook 'peter-cc-style)
 
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 (use-package! autopair
