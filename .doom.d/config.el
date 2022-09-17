@@ -315,6 +315,12 @@ does not exist"
 (remove-hook 'company-mode-hook #'text-mode)
 (add-hook 'company-mode-hook #'company-prescient-mode)
 
+;; (add-hook 'bazel-mode-hook
+;;           (lambda ()
+;;             (add-hook 'before-save-hook #'bazel-buildifier)))
+
+(setq bazel-buildifier-before-save t)
+
 (setq company-idle-delay 0.01)
 (setq company-require-match nil)
 (setq company-tooltip-limit 4)
@@ -326,6 +332,7 @@ does not exist"
   (define-key company-active-map (kbd "<tab>") #'company-complete-selection))
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.BUILD\\'" . bazel-mode))
 
 
 (after! tree-sitter
