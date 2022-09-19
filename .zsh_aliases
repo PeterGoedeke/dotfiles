@@ -1,8 +1,0 @@
-alias lh='ls -lhrt'
-alias lha='ls -lhrta'
-
-alias c='clear'
-alias v='vim'
-
-alias less=cless
-alias cat=ccat
