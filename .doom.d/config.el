@@ -197,6 +197,16 @@ does not exist"
 (set-file-template! "\\.\\(h\\|hpp\\)$" :trigger "__h" :mode 'c++-mode)
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+(setq lsp-clients-clangd-args
+      '("--header-insertion-decorators=0"
+        "--background-index"
+        "--header-insertion=iwyu"
+        "--limit-references=100"
+        "--limit-results=20"
+        "--j=8"
+        "--malloc-trim"
+        "--pch-storage=memory"))
+
 ;; make evil-args work with template arguments
 (after! evil-args
   (add-to-list 'evil-args-closers ">")
