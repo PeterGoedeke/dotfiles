@@ -184,6 +184,7 @@ does not exist"
   (c-set-offset 'inextern-lang '0)
   (c-set-offset 'inline-open '0)
   (c-set-offset 'func-decl-cont '0)
+  (c-set-offset 'substatement '0)
   (c-set-offset 'label '*)
   (c-set-offset 'case-label '*)
   (c-set-offset 'access-label '/)
