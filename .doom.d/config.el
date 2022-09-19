@@ -48,34 +48,35 @@
 ;; --------------------------------
 
 (after! org
-  (setq org-default-priority 70)
-  (setq org-capture-templates '(("t" "Todo [general]" entry
-                                 (file+headline "~/Nextcloud/org/inbox.org" "General")
-                                 "** TODO %i%?")
-                                ("d" "Todo [dotfiles]" entry
-                                 (file+headline "~/Nextcloud/org/inbox.org" "Dotfiles")
-                                 "** TODO %i%?")))
-  (setq org-refile-targets '((nil :maxlevel . 2)
-                             ("~/Nextcloud/org/main.org" :maxlevel . 1)
-                             ("~/Nextcloud/org/main.org" :tag . "project")))
-  (setq org-todo-keywords
-        '((sequence "NEXT(n)" "TODO(t)"  "|" "DONE(d)" "WONT(w)")))
-  (setq org-hide-emphasis-markers t)
-  (setq org-image-actual-width (list 800))
-  (setq org-agenda-custom-commands
-        `(("j" "Agenda Overview"
-           ((agenda "")
-            (todo "NEXT"
-                  ((org-agenda-overriding-header "Next tasks:")
-                   (org-agenda-sorting-strategy
-                    '((todo priority-down)))
-                   (org-agenda-prefix-format
-                    '((todo . " %?-10:(seq-elt (org-get-outline-path) 1) %-12:c")))))
-            (tags "+uni+TODO=\"TODO\""
-                  ((org-agenda-overriding-header "Next uni deadlines:")
-                   (org-agenda-prefix-format
-                    '((tags  . "%?-4:(seq-elt (org-get-outline-path) 1) %?-10(let ((deadline (org-get-deadline-time (point)))) (if deadline (format-time-string \"%Y-%m-%d\" deadline) \"\")) ")))
-                   (org-agenda-max-entries 5))))))))
+  (setq
+   org-default-priority 70
+   org-capture-templates '(("t" "Todo [general]" entry
+                            (file+headline "~/Nextcloud/org/inbox.org" "General")
+                            "** TODO %i%?")
+                           ("d" "Todo [dotfiles]" entry
+                            (file+headline "~/Nextcloud/org/inbox.org" "Dotfiles")
+                            "** TODO %i%?"))
+   org-refile-targets '((nil :maxlevel . 2)
+                        ("~/Nextcloud/org/main.org" :maxlevel . 1)
+                        ("~/Nextcloud/org/main.org" :tag . "project"))
+   org-todo-keywords
+   '((sequence "NEXT(n)" "TODO(t)"  "|" "DONE(d)" "WONT(w)"))
+   org-hide-emphasis-markers t
+   org-image-actual-width (list 800)
+   org-agenda-custom-commands
+   `(("j" "Agenda Overview"
+      ((agenda "")
+       (todo "NEXT"
+             ((org-agenda-overriding-header "Next tasks:")
+              (org-agenda-sorting-strategy
+               '((todo priority-down)))
+              (org-agenda-prefix-format
+               '((todo . " %?-10:(seq-elt (org-get-outline-path) 1) %-12:c")))))
+       (tags "+uni+TODO=\"TODO\""
+             ((org-agenda-overriding-header "Next uni deadlines:")
+              (org-agenda-prefix-format
+               '((tags  . "%?-4:(seq-elt (org-get-outline-path) 1) %?-10(let ((deadline (org-get-deadline-time (point)))) (if deadline (format-time-string \"%Y-%m-%d\" deadline) \"\")) ")))
+              (org-agenda-max-entries 5))))))))
 
 ;; --------------------------------
 ;; custom functions
@@ -191,9 +192,9 @@ does not exist"
   (c-set-offset 'label '*)
   (c-set-offset 'case-label '*)
   (c-set-offset 'access-label '/)
-  (setq c-basic-offset 2)
-  (setq tab-width 2)
-  (setq indent-tabs-mode nil))
+  (setq c-basic-offset 2
+        tab-width 2
+        indent-tabs-mode nil))
 
 (add-hook 'c++-mode-hook 'peter-cc-style)
 
@@ -223,10 +224,10 @@ does not exist"
 (remove-hook 'company-mode-hook #'text-mode)
 (add-hook 'company-mode-hook #'company-prescient-mode)
 
-(setq company-idle-delay 0.01)
-(setq company-require-match nil)
-(setq company-tooltip-limit 4)
-(setq lsp-signature-auto-activate nil)
+(setq company-idle-delay 0.01
+      company-require-match nil
+      company-tooltip-limit 4
+      lsp-signature-auto-activate nil)
 
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "TAB") #'company-complete-selection)
