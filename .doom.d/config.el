@@ -48,6 +48,7 @@
 ;; --------------------------------
 
 (after! org
+  (setq org-default-priority 70)
   (setq org-capture-templates '(("t" "Todo [general]" entry
                                  (file+headline "~/Nextcloud/org/inbox.org" "General")
                                  "** TODO %i%?")
@@ -64,10 +65,12 @@
   (setq org-agenda-custom-commands
         `(("j" "Agenda Overview"
            ((agenda "")
-            (tags "+TODO=\"NEXT\""
+            (todo "NEXT"
                   ((org-agenda-overriding-header "Next tasks:")
+                   (org-agenda-sorting-strategy
+                    '((todo priority-down)))
                    (org-agenda-prefix-format
-                    '((tags . " %?-10:(seq-elt (org-get-outline-path) 1) %-12:c")))))
+                    '((todo . " %?-10:(seq-elt (org-get-outline-path) 1) %-12:c")))))
             (tags "+uni+TODO=\"TODO\""
                   ((org-agenda-overriding-header "Next uni deadlines:")
                    (org-agenda-prefix-format
