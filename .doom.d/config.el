@@ -169,7 +169,9 @@ does not exist"
   (interactive)
   (find-file "BUILD.bazel"))
 
-(setq bazel-buildifier-before-save t)
+(setq bazel-command-options '("--config=clang")
+      bazel-buildifier-before-save t)
+
 (add-hook 'bazel-mode-hook #'company-mode)
 (add-to-list 'auto-mode-alist '("\\.BUILD\\'" . bazel-mode))
 
