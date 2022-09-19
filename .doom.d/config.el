@@ -49,7 +49,9 @@
 
 (after! org
   (setq
-   org-default-priority 70
+   org-highest-priority ?A
+   org-default-priority ?D
+   org-lowest-priority ?D
    org-capture-templates '(("t" "Todo [general]" entry
                             (file+headline "~/Nextcloud/org/inbox.org" "General")
                             "** TODO %i%?")
