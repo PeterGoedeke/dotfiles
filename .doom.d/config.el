@@ -247,6 +247,14 @@ does not exist"
 (add-hook! 'org-mode-hook 'visual-fill-column-mode)
 
 ;; --------------------------------
+;; javascript / typescript settings
+;; --------------------------------
+
+(after! lsp-mode
+  (setq lsp-javascript-format-enable nil
+        lsp-typescript-format-enable nil))
+
+;; --------------------------------
 ;; debugger settings
 ;; --------------------------------
 
