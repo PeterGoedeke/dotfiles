@@ -113,6 +113,11 @@ function setup_fisher {
   fisher install PatrickF1/fzf.fish
 }
 
+function install_doom {
+  git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+  ~/.emacs.d/bin/doom install
+}
+
 function link_config_files {
   # link home directory config files
 
@@ -150,3 +155,4 @@ install_yay
 install_yay_packages
 setup_fisher
 link_config_files
+install_doom
