@@ -72,6 +72,8 @@ function install_packages {
     nodejs
     npm
     python
+    rust-analyzer
+    rustup
 
     # applications
     cheese
