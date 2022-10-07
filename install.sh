@@ -35,11 +35,12 @@ function install_packages {
     alsa-utils
     blueman
     bluez bluez-utils
+    gnome-keyring libsecret
     networkmanager
+    nvidia nvidia-settings
     pamixer
     pavucontrol
     pulseaudio pulseaudio-bluetooth
-    nvidia nvidia-settings
 
     # window manager & utilities
     awesome
@@ -66,8 +67,10 @@ function install_packages {
     docker
     docker-compose
     gcc
+    gdb
     git
     jre-openjdk
+    lldb
     make
     nodejs
     npm

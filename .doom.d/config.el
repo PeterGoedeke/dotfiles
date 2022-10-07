@@ -247,6 +247,13 @@ does not exist"
 (add-hook! 'org-mode-hook 'visual-fill-column-mode)
 
 ;; --------------------------------
+;; debugger settings
+;; --------------------------------
+
+(setq dap-auto-configure-mode t)
+(require 'dap-cpptools)
+
+;; --------------------------------
 ;; prisma settings
 ;; --------------------------------
 
