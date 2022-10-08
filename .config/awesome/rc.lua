@@ -428,8 +428,14 @@ globalkeys = gears.table.join(
   awful.key({ modkey, "Mod1" }, "d", function() awful.spawn.with_shell("flameshot gui -s -c") end,
     { description = "screenshot region", group = "utils" }),
 
+  awful.key({ modkey, "Mod1", "Ctrl" }, "d", function() awful.spawn.with_shell("flameshot gui -s") end,
+    { description = "screenshot region to file", group = "utils" }),
+
   awful.key({ modkey, "Mod1" }, "f", function() awful.spawn.with_shell("flameshot screen -c") end,
     { description = "screenshot screen", group = "utils" }),
+
+  awful.key({ modkey, "Mod1", "Ctrl" }, "f", function() awful.spawn.with_shell("flameshot screen") end,
+    { description = "screenshot screen to file", group = "utils" }),
 
   -- System
   awful.key({ modkey, "Mod1" }, "r", function() awful.util.spawn("systemctl reboot") end,
