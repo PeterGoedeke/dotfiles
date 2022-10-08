@@ -299,6 +299,13 @@ does not exist"
 (setq magit-clone-default-directory "~/github/")
 
 ;; --------------------------------
+;; treemacs settings
+;; --------------------------------
+
+(add-hook 'treemacs-mode-hook 'treemacs-add-and-display-current-project-exclusively)
+(setq treemacs-follow-mode t)
+
+;; --------------------------------
 ;; keybindings
 ;; --------------------------------
 
