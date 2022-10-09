@@ -4,104 +4,114 @@ location="$HOME/dotfiles"
 config="$location/.config"
 
 function install_packages {
-  sudo pacman -Syu \
-    # development
-    alacritty
+  sudo pacman -Syu --noconfirm
+
+  # development
+  sudo pacman -S --noconfirm \
+    alacritty \
     emacs-nativecomp
 
-    # cli tools
-    fd
-    fish
-    flameshot
-    fzf
-    gnu-netcat
-    hspell
-    htop
-    hunspell
-    man-db
-    net-tools
-    openssh
-    ripgrep
-    speedtest-cli
-    sudo
-    tree
-    unzip
-    vim
-    wget
-    xclip
+  # cli tools
+  sudo pacman -S --noconfirm \
+    fd \
+    fish \
+    flameshot \
+    fzf \
+    gnu-netcat \
+    hspell \
+    htop \
+    hunspell \
+    man-db \
+    net-tools \
+    openssh \
+    ripgrep \
+    speedtest-cli \
+    sudo \
+    tree \
+    unzip \
+    vim \
+    wget \
+    xclip \
     zsa-wally
 
-    # system utilities
-    alsa-utils
-    blueman
-    bluez bluez-utils
-    gnome-keyring libsecret
-    networkmanager
-    nvidia nvidia-settings
-    pamixer
-    pavucontrol
+  # system utilities
+  sudo pacman -S --noconfirm \
+    alsa-utils \
+    blueman \
+    bluez bluez-utils \
+    gnome-keyring libsecret \
+    networkmanager \
+    nvidia nvidia-settings \
+    pamixer \
+    pavucontrol \
     pulseaudio pulseaudio-bluetooth
 
-    # window manager & utilities
-    awesome
-    autorandr
-    dracula-gtk-theme
-    gnome-themes-extra
-    gtk-engines
-    picom
-    redshift
+  # window manager & utilities
+  sudo pacman -S --noconfirm \
+    awesome \
+    autorandr \
+    dracula-gtk-theme \
+    gnome-themes-extra \
+    gtk-engines \
+    picom \
+    redshift \
     xorg
 
-    # fonts
-    nerd-fonts-meslo
-    noto-fonts noto-fonts-cjk noto-fonts-emoji
-    ttf-fira-code
-    ttf-roboto
+  # fonts
+  sudo pacman -S --noconfirm \
+    nerd-fonts-meslo \
+    noto-fonts noto-fonts-cjk noto-fonts-emoji \
+    ttf-fira-code \
+    ttf-roboto \
     ttf-ubuntu-font-family
 
-    # development tools
-    base-devel
-    bazel
-    clang
-    cmake
-    docker
-    docker-compose
-    gcc
-    gdb
-    git
-    jre-openjdk
-    lldb
-    make
-    nodejs
-    npm
-    python
-    rust-analyzer
+  # development tools
+  sudo pacman -S --noconfirm \
+    base-devel \
+    bazel \
+    clang \
+    cmake \
+    docker \
+    docker-compose \
+    gcc \
+    gdb \
+    git \
+    jre-openjdk \
+    lldb \
+    make \
+    nodejs \
+    npm \
+    python \
+    rust-analyzer \
     rustup
 
-    # applications
-    cheese
-    discord
-    eog
-    evince
-    firefox
-    gedit
-    gimp
-    libreoffice-still
-    nextcloud-client
-    obs-studio
-    pcmanfm
-    spotify
+  # applications
+  sudo pacman -S --noconfirm \
+    cheese \
+    discord \
+    eog \
+    evince \
+    firefox \
+    gedit \
+    gimp \
+    libreoffice-still \
+    nextcloud-client \
+    obs-studio \
+    pcmanfm \
+    spotify \
     vlc
 }
 
 function install_yay {
   sudo git clone https://aur.archlinux.org/yay.git /opt/yay-git
   sudo chown -R $USER:$USER /opt/yay-git
-  makepkg -sip /opt/yay-git PKGBUILD
+  cd /opt/yay-git
+  makepkg -si
+  cd -
 }
 
 function install_yay_packages {
-  yay -Syu --answerdiff None --answerclean None --removemake \
+  yes | yay -Syu --answerdiff None --answerclean None --removemake \
     autojump \
     google-chrome \
     mongodb-compass \
