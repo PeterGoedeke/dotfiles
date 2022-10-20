@@ -229,6 +229,7 @@ does not exist"
   (c-set-offset 'inline-open '0)
   (c-set-offset 'func-decl-cont '0)
   (c-set-offset 'substatement '0)
+  (c-set-offset 'statement-cont '0)
   (c-set-offset 'label '*)
   (c-set-offset 'case-label '*)
   (c-set-offset 'access-label '/)
@@ -260,14 +261,17 @@ does not exist"
 ;; company / lsp settings
 ;; --------------------------------
 
+(setq lsp-enable-snippet nil)
+
 (add-to-list 'company-global-modes 'text-mode)
 (remove-hook 'company-mode-hook #'text-mode)
 (add-hook 'company-mode-hook #'company-prescient-mode)
 
 (setq company-idle-delay 0.01
       company-require-match nil
-      company-tooltip-limit 4
-      lsp-signature-auto-activate nil)
+      company-tooltip-limit 10
+      company--disabled-backends '(company-yasnippet)
+      +lsp-company-backends '(company-capf))
 
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "TAB") #'company-complete-selection)
@@ -354,7 +358,8 @@ does not exist"
  :nv "*" #'evil-ex-search-word-backward
  :nv "ga" #'ace-jump-mode
  :i  "C-h" #'evil-delete-backward-char
- :i  "C-t" #'yas-insert-snippet
+ :i  "C-d" #'yas-insert-snippet
+ :i  "C-f" #'completion-at-point
  :v  "s" #'evil-surround-region
  :map dired-mode-map
  :nv "h" #'dired-up-directory
