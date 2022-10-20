@@ -69,3 +69,5 @@
 (package! company-prescient)
 
 (package! rmsbolt)
+
+(package! docker-tramp)

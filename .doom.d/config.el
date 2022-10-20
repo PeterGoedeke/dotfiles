@@ -211,15 +211,16 @@ does not exist"
 ;; c++ settings
 ;; --------------------------------
 
-(lsp-register-client
- (make-lsp-client :new-connection (lsp-tramp-connection "clangd")
-                  :major-modes '(c-mode c++-mode)
-                  :priority -1
-                  :remote? t
-                  :server-id 'clangd-remote
-                  :library-folders-fn (lambda (_workspace) lsp-clients-clangd-library-directories)
-                  :download-server-fn (lambda (_client callback error-callback _update?)
-                                        (lsp-package-ensure 'clangd callback error-callback))))
+(after! lsp
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-tramp-connection "clangd")
+                    :major-modes '(c-mode c++-mode)
+                    :priority -1
+                    :remote? t
+                    :server-id 'clangd-remote
+                    :library-folders-fn (lambda (_workspace) lsp-clients-clangd-library-directories)
+                    :download-server-fn (lambda (_client callback error-callback _update?)
+                                          (lsp-package-ensure 'clangd callback error-callback)))))
 
 (defun peter-cc-style()
   (c-set-style "linux")
