@@ -41,14 +41,17 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Nextcloud/org/")
-(setq org-agenda-files '("~/Nextcloud/org/main.org"))
+(setq org-agenda-files '("~/Nextcloud/org/main.org" "~/Nextcloud/org/habits.org"))
 
 ;; --------------------------------
 ;; org settings
 ;; --------------------------------
 
 (after! org
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
   (setq
+   org-habit-following-days 1
    org-highest-priority ?A
    org-default-priority ?D
    org-lowest-priority ?D
@@ -62,7 +65,7 @@
                         ("~/Nextcloud/org/main.org" :maxlevel . 1)
                         ("~/Nextcloud/org/main.org" :tag . "project"))
    org-todo-keywords
-   '((sequence "NEXT(n)" "TODO(t)"  "|" "DONE(d)" "WONT(w)"))
+   '((sequence "TODO(t)" "NEXT(n)"  "|" "DONE(d)" "WONT(w)"))
    org-hide-emphasis-markers t
    org-image-actual-width (list 800)
    org-agenda-custom-commands
