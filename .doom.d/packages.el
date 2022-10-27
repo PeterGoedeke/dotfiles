@@ -71,3 +71,7 @@
 (package! rmsbolt)
 
 (package! docker-tramp)
+
+(unpin! org-roam)
+(package! org-roam-ui)
+
