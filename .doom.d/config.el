@@ -350,6 +350,7 @@ does not exist"
        :desc "transpose windows" "w" #'toggle-window-split
        :desc "type" "t" #'insert-type)
       :desc "jump" "j" #'evil-avy-goto-word-1
+      :desc "browse path" "fa" #'find-file-at-point
       :desc "other" "fo" #'swap-between-source-header
       :desc "bazel" "fb" #'open-bazel-file
       :desc "undo" "fu" #'recentf-open-most-recent-file
