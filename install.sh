@@ -69,6 +69,7 @@ function install_packages {
   sudo pacman -S --noconfirm \
     base-devel \
     bazel \
+    bear \
     clang \
     cmake \
     docker \
@@ -154,13 +155,7 @@ function link_config_files {
   ln -bs "$config/rofi/config.rasi" "$HOME/.config/.rofi/config.rasi"
 
   # link doom files
-
-  mkdir -p $HOME/.doom.d
-
-  ln -bs "$location/.doom.d/config.el" "$HOME/.doom.d/config.el"
-  ln -bs "$location/.doom.d/init.el" "$HOME/.doom.d/init.el"
-  ln -bs "$location/.doom.d/packages.el" "$HOME/.doom.d/packages.el"
-  ln -bs "$location/.doom.d/snippets" "$HOME/.doom.d/snippets"
+  ln -bs "$location/.doom.d" "$HOME/.doom.d"
 }
 
 install_packages

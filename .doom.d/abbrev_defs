@@ -1,0 +1,15 @@
+;;-*-coding: utf-8;-*-
+(define-abbrev-table 'c++-mode-abbrev-table
+  '(
+    ("st" "std::string" nil :count 0)
+    ("stp" "const std::string&" nil :count 0)
+    ("ss" "std::string_view" nil :count 0)
+    ("vt" "std::vector" nil :count 0)
+    ("vtp" "const std::vector&" nil :count 0)
+    ("mt" "std::map" nil :count 0)
+    ("mtp" "const std::map&" nil :count 0)
+    ("umt" "std::unordered_map" nil :count 0)
+    ("umtp" "const std::unordered_map&" nil :count 0)
+    ("ct" "auto&" nil :count 0)
+    ("cct" "const auto&" nil :count 0)
+   ))

@@ -341,6 +341,12 @@ does not exist"
 (setq treemacs-follow-mode t)
 
 ;; --------------------------------
+;; abbrev / dabbrev settings
+;; --------------------------------
+
+(setq abbrev-file-name "~/.doom.d/abbrev_defs")
+
+;; --------------------------------
 ;; keybindings
 ;; --------------------------------
 
@@ -371,6 +377,9 @@ does not exist"
       "9" #'winum-select-window-9
       ";" #'+workspace/switch-to)
 
+(global-set-key (kbd "M-v") (lambda ()
+                  (interactive)
+                  (insert-char #x27)))
 (map!
  :nv "0" #'evil-first-non-blank
  :nv "#" #'evil-ex-search-word-forward
@@ -380,7 +389,9 @@ does not exist"
  :nv "ga" #'ace-jump-mode
  :i  "C-h" #'evil-delete-backward-char
  :i  "C-d" #'yas-insert-snippet
- :i  "C-f" #'completion-at-point
+ :i  "C-s" #'completion-at-point
+ :i  "C-f" #'dabbrev-expand
+ :i  "C-SPC" (lambda () (interactive) (insert-char #x20))
  :v  "s" #'evil-surround-region
  :map dired-mode-map
  :nv "h" #'dired-up-directory
