@@ -49,7 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(package! lsp-mode)
+;; (package! lsp-mode)
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 
 (package! visual-fill-column)
@@ -61,7 +61,7 @@
 
 (package! ace-jump-mode)
 
-(package! color-identifiers-mode)
+;; (package! color-identifiers-mode)
 
 (package! doom-snippets :ignore t)
 
@@ -70,6 +70,7 @@
 
 (package! rmsbolt)
 
+;; (package! srefactor)
 (package! docker-tramp)
 
 (unpin! org-roam)

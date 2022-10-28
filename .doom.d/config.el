@@ -281,15 +281,23 @@ does not exist"
 ;; company / lsp settings
 ;; --------------------------------
 
+;; disable completion of method signatures
 (setq lsp-enable-snippet nil)
 
 (add-to-list 'company-global-modes 'text-mode)
 (remove-hook 'company-mode-hook #'text-mode)
 (add-hook 'company-mode-hook #'company-prescient-mode)
 
-(setq company-idle-delay 0.01
+;; (add-hook 'typescript-mode-hook
+;;           (lambda () (setq-local company-idle-delay 0.1)))
+
+;; (add-hook 'javascript-mode-hook
+;;           (lambda () (setq-local company-idle-delay 0.1)))
+
+(setq company-idle-delay 0.05
       company-require-match nil
       company-tooltip-limit 10
+      ;; do not offer snippets as completions
       company--disabled-backends '(company-yasnippet)
       +lsp-company-backends '(company-capf))
 
@@ -310,16 +318,16 @@ does not exist"
 ;; javascript / typescript settings
 ;; --------------------------------
 
-(after! lsp-mode
-  (setq lsp-javascript-format-enable nil
-        lsp-typescript-format-enable nil))
+;; (after! lsp-mode
+;;   (setq lsp-javascript-format-enable nil
+;;         lsp-typescript-format-enable nil))
 
 ;; --------------------------------
 ;; debugger settings
 ;; --------------------------------
 
-(setq dap-auto-configure-mode t)
-(require 'dap-cpptools)
+;; (setq dap-auto-configure-mode t)
+;; (require 'dap-cpptools)
 
 ;; --------------------------------
 ;; prisma settings
