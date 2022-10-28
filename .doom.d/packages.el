@@ -75,3 +75,4 @@
 (unpin! org-roam)
 (package! org-roam-ui)
 
+(package! dwim-shell-command)

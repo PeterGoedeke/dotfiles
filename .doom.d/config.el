@@ -341,6 +341,12 @@ does not exist"
 (setq treemacs-follow-mode t)
 
 ;; --------------------------------
+;; dwim settings
+;; --------------------------------
+
+(require 'dwim-shell-commands)
+
+;; --------------------------------
 ;; abbrev / dabbrev settings
 ;; --------------------------------
 
