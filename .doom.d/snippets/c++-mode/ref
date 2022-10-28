@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ref
+# key: ref
+# --
+const $1& $0
