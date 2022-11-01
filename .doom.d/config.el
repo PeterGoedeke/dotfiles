@@ -358,7 +358,8 @@ does not exist"
 ;; abbrev / dabbrev settings
 ;; --------------------------------
 
-(setq abbrev-file-name "~/.doom.d/abbrev_defs")
+(setq abbrev-file-name "~/.doom.d/abbrev_defs"
+      dabbrev-case-replace nil)
 
 ;; --------------------------------
 ;; keybindings
