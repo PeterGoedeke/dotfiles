@@ -41,7 +41,10 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Nextcloud/org/")
-(setq org-agenda-files '("~/Nextcloud/org/main.org" "~/Nextcloud/org/habits.org"))
+(setq org-agenda-files
+      '("~/Nextcloud/org/main.org"
+        "~/Nextcloud/org/habits.org"
+        "~/Nextcloud/org/inbox.org"))
 
 ;; --------------------------------
 ;; org settings
@@ -50,24 +53,25 @@
 (after! org
   (require 'org-habit)
   (add-to-list 'org-modules 'org-habit)
+
   (setq
    org-habit-following-days 1
    org-highest-priority ?A
    org-default-priority ?D
    org-lowest-priority ?D
-   org-capture-templates '(("t" "Todo [general]" entry
-                            (file+headline "~/Nextcloud/org/inbox.org" "General")
-                            "** TODO %i%?")
-                           ("d" "Todo [dotfiles]" entry
-                            (file+headline "~/Nextcloud/org/inbox.org" "Dotfiles")
+   org-capture-templates '(("X" "Todo" entry
+                            (file+headline "~/Nextcloud/org/inbox.org" "Inbox")
                             "** TODO %i%?"))
+
    org-refile-targets '((nil :maxlevel . 2)
                         ("~/Nextcloud/org/main.org" :maxlevel . 1)
                         ("~/Nextcloud/org/main.org" :tag . "project"))
+
    org-todo-keywords
    '((sequence "TODO(t)" "NEXT(n)"  "|" "DONE(d)" "WONT(w)"))
    org-hide-emphasis-markers t
    org-image-actual-width (list 800)
+
    org-agenda-custom-commands
    `(("j" "Agenda Overview"
       ((agenda "")
@@ -77,11 +81,8 @@
                '((todo priority-down)))
               (org-agenda-prefix-format
                '((todo . " %?-10:(seq-elt (org-get-outline-path) 1) %-12:c")))))
-       (tags "+uni+TODO=\"TODO\""
-             ((org-agenda-overriding-header "Next uni deadlines:")
-              (org-agenda-prefix-format
-               '((tags  . "%?-4:(seq-elt (org-get-outline-path) 1) %?-10(let ((deadline (org-get-deadline-time (point)))) (if deadline (format-time-string \"%Y-%m-%d\" deadline) \"\")) ")))
-              (org-agenda-max-entries 5))))))))
+       (tags "+inbox+TODO=\"TODO\""
+             ((org-agenda-overriding-header "Inbox:"))))))))
 
 ;; --------------------------------
 ;; org roam settings
