@@ -394,8 +394,9 @@ does not exist"
       ";" #'+workspace/switch-to)
 
 (global-set-key (kbd "M-v") (lambda ()
-                  (interactive)
-                  (insert-char #x27)))
+                              (interactive)
+                              (insert-char #x27)))
+
 (map!
  :nv "0" #'evil-first-non-blank
  :nv "#" #'evil-ex-search-word-forward
@@ -417,7 +418,9 @@ does not exist"
  :map evil-inner-text-objects-map
  :g "b" #'evil-textobj-anyblock-inner-block
  :map evil-operator-state-map
- :g "b" #'evil-textobj-anyblock-inner-block)
+ :g "b" #'evil-textobj-anyblock-inner-block
+ :map pdf-view-mode-map
+ :nv "t" #'pdf-view-themed-minor-mode)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
