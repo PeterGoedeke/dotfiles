@@ -192,6 +192,15 @@ require('packer').startup(function(use)
     end
   }
 
+  use { "liuchengxu/vista.vim" }
+
+  use {
+    "jakemason/ouroboros.nvim",
+    requires = "nvim-lua/plenary.nvim"
+  }
+
+  use { "gauteh/vim-cppman" }
+
   use { "kevinhwang91/rnvimr" }
   use { "mfussenegger/nvim-dap" }
   -- use { "francoiscabrol/ranger.vim" }
@@ -507,6 +516,7 @@ vim.keymap.set('n', '<leader>ff', function()
 end,
   { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>fs', function() vim.cmd('w') end)
+vim.keymap.set('n', '<leader>fo', function() vim.cmd("Ouroboros") end)
 
 vim.keymap.set('n', '<leader>.', function()
   require("telescope").extensions.file_browser.file_browser({
@@ -654,6 +664,11 @@ local on_attach = function(_, bufnr)
   end
 
   nmap('<leader>cr', vim.lsp.buf.rename, '[R]e[n]ame')
+
+  nmap('<leader>co', function()
+    vim.cmd("Vista!!")
+  end, '[R]e[n]ame')
+
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   nmap('<leader>cx', function() vim.cmd("Trouble") end, '[C]ode [A]ction')
   nmap('<leader>cc', function()
@@ -669,7 +684,7 @@ local on_attach = function(_, bufnr)
   -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  -- nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
