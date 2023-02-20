@@ -339,16 +339,17 @@ end
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 
--- vim.api.nvim_create_autocmd('BufWritePost', {
---   command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
---   group = packer_group,
---   pattern = vim.fn.expand '$MYVIMRC',
--- })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
+  group = packer_group,
+  pattern = vim.fn.expand '$MYVIMRC',
+})
 
 -- Set highlight on search
 vim.o.hlsearch = true
 
 vim.o.scrolloff = 10
+vim.o.sidescrolloff = 5
 
 -- Disable line numbers
 vim.wo.number = false
@@ -519,11 +520,10 @@ vim.keymap.set('n', '<leader>fs', function() vim.cmd('w') end)
 vim.keymap.set('n', '<leader>fo', function() vim.cmd("Ouroboros") end)
 
 vim.keymap.set('n', '<leader>.', function()
-  require("telescope").extensions.file_browser.file_browser({
-    path = "%:p:h"
-  })
+  vim.cmd("RnvimrToggle")
 end,
   { desc = '[S]earch [D]iagnostics' })
+
 vim.keymap.set('n', '<leader>pp', function() require('telescope').extensions.projects.projects {} end)
 
 
@@ -531,7 +531,9 @@ vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[?] Find recently 
 vim.keymap.set('n', '<leader>dd', function() vim.cmd("RnvimrToggle") end, { desc = '[?] Find recently opened files' })
 
 local function wincmd(command)
-  return function() vim.cmd.wincmd(command) end
+  return function()
+    pcall(vim.cmd.wincmd, command)
+  end
 end
 
 vim.keymap.set('n', '<leader>wh', wincmd('h'), { desc = '[?] Find recently opened files' })
@@ -570,6 +572,18 @@ end, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader>wd', wincmd('c'), { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader>wn', wincmd('n'), { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader>wmm', wincmd('o'), { desc = '[?] Find recently opened files' })
+
+vim.keymap.set('n', '<leader>tn', function() vim.cmd("tabnew") end,
+  { desc = '[?] Find recently opened files' })
+
+vim.keymap.set('n', '<leader>td', function() vim.cmd("tabclose") end,
+  { desc = '[?] Find recently opened files' })
+
+vim.keymap.set('n', '<leader>tl', function() vim.cmd("tabnext") end,
+  { desc = '[?] Find recently opened files' })
+
+vim.keymap.set('n', '<leader>th', function() vim.cmd("tabprevious") end,
+  { desc = '[?] Find recently opened files' })
 
 
 -- [[ Configure Treesitter ]]
