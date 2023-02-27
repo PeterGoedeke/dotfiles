@@ -26,7 +26,8 @@ function link_files {
 }
 
 function install_mac {
-  brew install neovim tmux nnn fzf git-delta lazygit autojump
+  brew install neovim tmux nnn fzf git-delta lazygit autojump \
+    alfred amethyst
   brew install --cask kitty
 }
 
