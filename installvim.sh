@@ -22,6 +22,7 @@ function link_files {
   ln -bs "$config/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
   ln -bs "$config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
   ln -bs "$location/.zshrc" "$HOME/.zshrc"
+  ln -bs "$location/.zshlocal" "$HOME/.zshlocal"
 }
 
 function install_mac {
