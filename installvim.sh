@@ -26,18 +26,19 @@ function link_files {
 }
 
 function install_mac {
-  brew install tmux lazygit neovim fzf autojump nnn
+  brew install neovim tmux nnn fzf git-delta lazygit autojump
   brew install --cask kitty
 }
 
 function install_arch {
   sudo pacman -S --noconfirm \
     kitty \
-    tmux \
-    lazygit \
     neovim \
-    fzf \
+    tmux \
     nnn \
+    fzf \
+    git-delta \
+    lazygit \
     autojump-rs
 }
 
@@ -46,9 +47,10 @@ function install_redhat {
 
   sudo dnf -qy install \
     kitty \
-    tmux \
-    lazygit \
     neovim \
+    tmux \
     fzf \
+    git-delta \
+    lazygit \
     autojump
 }

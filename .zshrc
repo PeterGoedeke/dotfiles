@@ -105,3 +105,11 @@ bindkey -M viins '^R' fzf-history-widget
 
 # device specific configuration (e.g. $JAVA_HOME) 
 source ~/.zshlocal
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# in your .bashrc/.zshrc/*rc
+alias bathelp='bat --plain --language=help'
+help() {
+    "$@" --help 2>&1 | bathelp
+}

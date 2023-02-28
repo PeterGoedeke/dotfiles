@@ -4,14 +4,14 @@
 [credential]
 	helper = cache
 [core]
-	editor = vim
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	editor = nvim
+	pager = delta
 	excludesfile = ~/.gitignore
 [merge]
 	tool = vimdiff
 [interactive]
-	diffFilter = diff-so-fancy --patch
-[diff-so-fancy]
-	markEmptyLines = false
+	diffFilter = delta --color-only
+[diff]
+  colorMoved = default
 [github]
 	user = peterbgoedeke@gmail.com
