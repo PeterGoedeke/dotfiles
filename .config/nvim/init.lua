@@ -201,6 +201,11 @@ require('packer').startup(function(use)
   }
 
   use {
+    "luukvbaal/nnn.nvim",
+    config = function() require("nnn").setup() end
+  }
+
+  use {
     "ThePrimeagen/harpoon",
     requires = { "nvim-lua/plenary.nvim" }
   }
@@ -1106,7 +1111,7 @@ wk.register({
       win_command("L"),
       "Move window to right"
     },
-    wt = {
+    t = {
       win_command("L"),
       "Move window to right"
     },
@@ -1144,6 +1149,11 @@ wk.register({
       win_command("o"),
       "Maximize"
     }
+  },
+
+  d = {
+    command("NnnPicker"),
+    "File picker"
   },
 
   t = {
