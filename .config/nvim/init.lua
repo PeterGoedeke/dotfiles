@@ -202,7 +202,11 @@ require('packer').startup(function(use)
 
   use {
     "luukvbaal/nnn.nvim",
-    config = function() require("nnn").setup() end
+    config = function()
+      require("nnn").setup {
+        replace_netrw = 'picker'
+      }
+    end
   }
 
   use {
@@ -220,14 +224,13 @@ require('packer').startup(function(use)
     config = function()
       vim.g.switch_custom_definitions = {
         { "std::string_view ", "const std::string &" },
-        { "class", "struct" }
+        { "class",             "struct" }
       }
     end
   }
 
-  use {
-    "junegunn/fzf.vim"
-  }
+  use { "junegunn/fzf" }
+  use { "junegunn/fzf.vim" }
 
   use { "liuchengxu/vista.vim" }
 
@@ -476,7 +479,7 @@ require('telescope').setup {
   },
   extensions = {
     file_browser = {
-      hijack_netrw = true,
+      hijack_netrw = false,
     },
     fzf = {
       fuzzy = false,
@@ -580,7 +583,6 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -641,7 +643,7 @@ cmp.setup {
   },
 
   mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
@@ -670,8 +672,8 @@ cmp.setup {
       end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      if luasnip.jumpable( -1) then
+        luasnip.jump( -1)
       else
         fallback()
       end
@@ -763,7 +765,6 @@ dap.adapters.cpp = {
   id = 'cpp',
   type = 'executable',
   command = '/home/peter/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7'
-
 }
 
 dap.configurations.cpp = {
@@ -820,34 +821,6 @@ local function open_file(path)
   end
 end
 
-local function file_browser(mode, path)
-  local config = {
-    hide_parent_dir = true,
-    hidden = true,
-  }
-  if path then
-    config["path"] = path
-  end
-
-  if mode == "folder" then
-    config["files"] = false
-    config["add_dirs"] = true
-    config["cwd_to_path"] = true
-  elseif mode == "file" then
-    config["files"] = true
-    config["add_dirs"] = false
-  elseif mode == "default" then
-    config["files"] = true
-    config["add_dirs"] = true
-  else
-    error("Invalid call")
-  end
-
-  return function()
-    require("telescope").extensions.file_browser.file_browser(config)
-  end
-end
-
 local function command(cmd)
   return function()
     vim.cmd(cmd)
@@ -863,6 +836,37 @@ end
 local function harpoon_open(pos)
   return function()
     require("harpoon.ui").nav_file(pos)
+  end
+end
+
+local function file_searcher(options)
+  local exe = options.exe or 'fd'
+  local sink = options.sink or 'e'
+
+  local source = exe
+  if options.flags then
+    source = source .. ' ' .. options.flags
+  end
+
+  return function()
+    vim.fn['fzf#run']({ source = source, dir = options.dir, sink = sink })
+  end
+end
+
+local function testfunc(dir, options)
+  return function()
+    if not options then
+      options = {}
+      options.dir = dir
+    end
+    if not options.source then
+      options.source = 'fd'
+      print(options.source)
+    end
+    if not options.sink then
+      options.sink = 'e'
+    end
+    vim.fn['fzf#run'](options)
   end
 end
 
@@ -883,38 +887,32 @@ vim.keymap.set('i', 'jk', "<ESC>`^", { silent = true, noremap = true })
 vim.keymap.set('n', 'ga', "<Plug>Lightspeed_omni_s")
 
 wk.register({
-  ["."] = {
-    file_browser("file", "%:p:h"),
-    "Files from file"
-  },
   [":"] = {
     command("History:"),
     "Search history"
   },
-
+  ["/"] = {
+    command("History/"),
+    "Search searches"
+  },
+  ["."] = {
+    command("NnnPicker %:p:h"),
+    "Files from file"
+  },
+  ["~"] = {
+    command("NnnPicker $HOME"),
+    "Files from home"
+  },
+  r = {
+    command("History!"),
+    "Recent files"
+  },
+  d = {
+    command("NnnPicker"),
+    "Files from cwd"
+  },
   f = {
     name = "file",
-    f = {
-      file_browser("folder", "%:p:h"),
-      "Folders from file"
-    },
-    F = {
-      file_browser("folder"),
-      "Folders from cwd"
-    },
-    e = {
-      file_browser("default", "%:p:h"),
-      "Explore from file"
-    },
-    ["."] = {
-      file_browser("file"),
-      "Files from cwd"
-    },
-    E = {
-      file_browser("default"),
-      "Explore from cwd"
-    },
-
     s = {
       command("w"),
       "Save file"
@@ -928,7 +926,8 @@ wk.register({
       "Bazel file"
     },
     r = {
-      "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
+      -- "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
+      command("History!"),
       "Recent files"
     },
     p = {
@@ -936,28 +935,125 @@ wk.register({
       "Edit config"
     }
   },
-
-  F = {
-    name = "~/file",
-    ["."] = {
-      file_browser("file", "~"),
-      "Files from home"
-    },
-    F = {
-      file_browser("folder", "~"),
-      "Folders from home"
-    },
-    E = {
-      file_browser("default", "~"),
-      "Explore from home"
-    }
-  },
-
   s = {
     name = "search",
+    ["~"] = {
+      function()
+        vim.fn['fzf#run']({
+          source = 'fd', dir = '$HOME', sink = 'e'
+        })
+      end, "Search from home"
+    },
     d = {
-      builtin.live_grep,
-      "Search from cwd"
+      function()
+        vim.fn['fzf#run']({
+          source = 'fd', dir = vim.fn.getcwd(), sink = 'e'
+        })
+      end, "Search from cwd"
+    },
+    ["."] = {
+      function()
+        vim.fn['fzf#run']({
+          source = 'fd', dir = vim.fn.expand('%:p:h'), sink = 'e'
+        })
+      end, "Search from file"
+    },
+    u = {
+      name = "ignored",
+      ["~"] = {
+        function()
+          vim.fn['fzf#run']({
+            source = 'fd -u', dir = '$HOME', sink = 'e'
+          })
+        end, "Search from home"
+      },
+      d = {
+        function()
+          vim.fn['fzf#run']({
+            source = 'fd -u', dir = vim.fn.getcwd(), sink = 'e'
+          })
+        end, "Search from cwd"
+      },
+      ["."] = {
+        function()
+          vim.fn['fzf#run']({
+            source = 'fd -u', dir = vim.fn.expand('%:p:h'), sink = 'e'
+          })
+        end, "Search from file"
+      },
+    },
+    h = {
+      name = "hidden",
+      ["~"] = {
+        function()
+          vim.fn['fzf#run']({
+            source = 'fd -H', dir = '$HOME', sink = 'e'
+          })
+        end, "Search from home"
+      },
+      d = {
+        function()
+          vim.fn['fzf#run']({
+            source = 'fd -H', dir = vim.fn.getcwd(), sink = 'e'
+          })
+        end, "Search from cwd"
+      },
+      ["."] = {
+        function()
+          vim.fn['fzf#run']({
+            source = 'fd -H', dir = vim.fn.expand('%:p:h'), sink = 'e'
+          })
+        end, "Search from file"
+      },
+    },
+    e = {
+      name = "extension",
+      s = {
+        ["~"] = {
+          function()
+            vim.fn['fzf#run']({
+              source = 'fd -e java -e=cpp -e=c -e=h -e=hpp -e=java', dir = '$HOME', sink = 'e'
+            })
+          end, "Search from home"
+        },
+        d = {
+          function()
+            vim.fn['fzf#run']({
+              source = 'fd -e java -e=cpp -e=c -e=h -e=hpp -e=java', dir = vim.fn.getcwd(), sink = 'e'
+            })
+          end, "Search from cwd"
+        },
+        ["."] = {
+          function()
+            vim.fn['fzf#run']({
+              source = 'fd -e java -e=cpp -e=c -e=h -e=hpp -e=java', dir = vim.fn.expand('%:p:h'), sink = 'e'
+            })
+          end, "Search from file"
+        },
+      },
+      j = {
+        ["~"] = {
+          function()
+            vim.fn['fzf#run']({
+              source = 'fd -e=json', dir = '$HOME', sink = 'e'
+            })
+          end, "Search from home"
+        },
+        d = {
+          function()
+            vim.fn['fzf#run']({
+              source = 'fd -e=json', dir = vim.fn.getcwd(), sink = 'e'
+            })
+          end, "Search from cwd"
+        },
+        ["."] = {
+          function()
+            vim.fn['fzf#run']({
+              source = 'fd -e=json', dir = vim.fn.expand('%:p:h'), sink = 'e'
+            })
+          end, "Search from file"
+        },
+      },
     },
     m = {
       builtin.man_pages,
@@ -970,16 +1066,11 @@ wk.register({
       end,
       "Search symbols"
     },
-    f = {
-      builtin.find_files,
-      "Search files"
-    },
-    h = {
-      builtin.help_tags,
+    H = {
+      command("Helptags!"),
       "Search help"
     },
   },
-
   b = {
     name = "buffer",
     d = {
@@ -987,7 +1078,6 @@ wk.register({
       "Close buffer"
     }
   },
-
   ["-"] = {
     name = "harpoon",
     m = {
@@ -1023,7 +1113,6 @@ wk.register({
       "Next file"
     }
   },
-
   o = {
     name = "open",
     gi = { open_file(".gitignore"), ".gitignore" },
@@ -1036,7 +1125,6 @@ wk.register({
     rm = { open_file("README.md"), "README.md" },
     to = { open_file("todos.md"), "todos.md" },
   },
-
   O = {
     name = "~/open",
     zs = { open_file("~/.zshrc"), "~/.zshrc" },
@@ -1046,7 +1134,6 @@ wk.register({
     gi = { open_file("~/.gitignore"), "~/.gitignore" },
     gc = { open_file("~/.gitconfig"), "~/.gitconfig" },
   },
-
   p = {
     name = "project",
     p = {
@@ -1060,7 +1147,6 @@ wk.register({
       "Recent project files"
     }
   },
-
   w = {
     name = "window",
     h = {
@@ -1150,12 +1236,6 @@ wk.register({
       "Maximize"
     }
   },
-
-  d = {
-    command("NnnPicker"),
-    "File picker"
-  },
-
   t = {
     name = "tab/toggle",
     n = {
@@ -1185,9 +1265,12 @@ wk.register({
     b = {
       command("Gitsigns toggle_current_line_blame"),
       "Toggle blame"
+    },
+    m = {
+      win_command("T"),
+      "Move window to new tab"
     }
   },
-
   l = {
     name = "list",
     n = {
@@ -1207,7 +1290,6 @@ wk.register({
       "Replace, rename"
     }
   },
-
   h = {
     name = "config",
     c = {
@@ -1223,7 +1305,6 @@ wk.register({
       "Clean packages"
     }
   },
-
   c = {
     name = "code",
     r = {
@@ -1245,6 +1326,45 @@ wk.register({
     c = {
       command("exe 'Dispatch' dispatch#request().command"),
       "Rerun compile"
-    }
+    },
+    ["~"] = {
+      function()
+        vim.fn['fzf#run']({
+          source = 'fd -e java -e=cpp -e=c -e=h -e=hpp -e=java', dir = '$HOME', sink = 'e'
+        })
+      end, "Search from home"
+    },
+    d = {
+      function()
+        vim.fn['fzf#run']({
+          source = 'fd -e java -e=cpp -e=c -e=h -e=hpp -e=java', dir = vim.fn.getcwd(), sink = 'e'
+        })
+      end, "Search from cwd"
+    },
+    ["."] = {
+      function()
+        vim.fn['fzf#run']({
+          source = 'fd -e java -e=cpp -e=c -e=h -e=hpp -e=java', dir = vim.fn.expand('%:p:h'), sink = 'e'
+        })
+      end, "Search from file"
+    },
   }
 }, { prefix = "<leader>" })
+
+vim.g.fzf_preview_window = { 'up,80%' }
+
+vim.cmd [[
+    function! s:build_quickfix_list(lines)
+      call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+      copen
+      cc
+    endfunction
+
+    let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+    let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all+accept'
+]]
