@@ -664,16 +664,16 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
+    ['<C-f>'] = cmp.mapping(function(fallback)
       if luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
       end
     end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if luasnip.jumpable( -1) then
-        luasnip.jump( -1)
+    ['<C-d>'] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -875,7 +875,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
 vim.keymap.set('n', 'H', "^")
 vim.keymap.set('n', 'L', "$")
 
@@ -1236,6 +1235,17 @@ wk.register({
       "Maximize"
     }
   },
+
+  d = {
+    command("NnnPicker %:h"),
+    "File picker"
+  },
+
+  D = {
+    command("NnnPicker " .. vim.fn.getcwd()),
+    "File picker"
+  },
+
   t = {
     name = "tab/toggle",
     n = {
