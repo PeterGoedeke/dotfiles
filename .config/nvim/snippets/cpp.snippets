@@ -1,0 +1,38 @@
+snippet inc
+  #include <${0}>
+
+snippet incs
+  #include "${0}"
+
+snippet cout
+  std::cout << ${0} << std::endl;
+
+snippet couts
+  std::cout << "${0}" << std::endl;
+
+snippet nodis
+  [[nodiscard]] 
+
+snippet cl
+  class $1
+  {
+    public:
+      $1($2) {}
+      ${0}
+    private:
+  };
+
+snippet st
+  struct $1
+  {
+    ${0}
+  };
+
+snippet tst
+  template <typename $1>
+
+snippet tnd
+  template <typename $1, typename $2>
+
+snippet trd
+  template <typename $1, typename $2, typename $3>
